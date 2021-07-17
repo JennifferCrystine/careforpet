@@ -13,4 +13,14 @@ public class ExemploController {
         model.addAttribute("nome", "Jenniffer");
         return "exemplo";
     }
+
+    @GetMapping("/")
+    public String home() {
+        return "homepage";
+    }
+
+    @GetMapping("/login")
+    public String login() {
+        return "login";
+    }
 }
