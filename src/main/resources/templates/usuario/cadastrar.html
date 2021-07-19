@@ -1,0 +1,18 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" xmlns:th="https://www.thymeleaf.org"
+      xmlns:sec="https://www.thymeleaf.org/thymeleaf-extras-springsecurity3">
+<head>
+    <title>Cadastrar </title>
+</head>
+<body>
+
+<span th:if="${errorMessage}"  th:text="${errorMessage}">Error</span>
+
+<form th:action="@{/usuario/cadastrar}" method="post">
+    <div><label> Usuário : <input type="text" name="email"/> </label></div>
+    <div><label> Senha: <input type="password" name="senha"/> </label></div>
+    <div><label> Confirmar Senha: <input type="password" name="confirmacaoSenha"/> </label></div>
+    <div><input type="submit" value="Cadastrar"/></div>
+</form>
+</body>
+</html>
