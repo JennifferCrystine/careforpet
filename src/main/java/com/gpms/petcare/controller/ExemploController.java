@@ -23,4 +23,10 @@ public class ExemploController {
     public String login() {
         return "login";
     }
+
+
+    @GetMapping("/adote")
+    public String adocao() {
+        return "adocao";
+    }
 }
