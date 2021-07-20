@@ -2,20 +2,56 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
+    <link th:rel="stylesheet" th:href="@{webjars/bootstrap/5.0.0/css/bootstrap.min.css} "/>
     <title>Adoção</title>
 </head>
 <body>
-    <div class="adote">
-        <h1>Adote</h1>
-        <img src="data:image/jpeg;base64,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">
-        <p>Nome: Psspsps</p>
-        <p>Raça: Vira-lata</p>
-        <p>Idade: 7 anos</p>
-        <p>Endereço: Psspsps</p>
-        <button>Adote</button>
-        <h3>Pspsps</h3>
-        <p>Oi, eu sou o pspsps quero muito ter uma casinha...</p>
+    <div class="container">
+        <h1 class="mt-3 text-center">Bolota</h1>
+        <div class="row">
+            <div class="col-3 img-wrapper">
+                <img alt="imagem de gatinho" src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTohIHVxx70U8hz2Lx4TIzeB1cts-PfavaBBA&usqp=CAU">
+                <div class="mt-2 pet-infos">
+                    <p>Raça: Vira-lata</p>
+                    <p>Idade: 7 anos</p>
+                    <p class="row-cols-2">Endereço: Rua dos Bobos, 123 - Flamengo, Rio de Janeiro</p>
+                </div>
+                <button type="button" class="mb-2 btn btn-primary">Adote</button>
+            </div>
+            <div class="col-9 d-flex align-content-center info-wrapper">
+                <p>
+                    Brownie pudding macaroon fruitcake dessert tiramisu chupa chups sweet.
+                    Sugar plum dragée croissant cookie muffin cake apple pie gummi bears.
+                    Icing topping cake croissant gummi bears. Powder sweet roll soufflé halvah lemon drops tart.
+                    Gingerbread powder donut candy dragée.
+                    Cookie gummies topping jelly brownie chocolate cake jelly-o.
+                    Icing icing marshmallow pie ice cream marshmallow brownie.
+                    Brownie pudding macaroon fruitcake dessert tiramisu chupa chups sweet.
+                    Sugar plum dragée croissant cookie muffin cake apple pie gummi bears.
+                    Chocolate cake dragée tootsie roll chocolate tootsie roll gummies.
+                    Cupcake jelly-o caramels.
+                </p>
+            </div>
+        </div>
+        <div class="medias">
+            <div class="d-flex justify-content-between images">
+                <img alt="imagem de gatinho" src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTohIHVxx70U8hz2Lx4TIzeB1cts-PfavaBBA&usqp=CAU">
+                <img alt="imagem de gatinho" src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTohIHVxx70U8hz2Lx4TIzeB1cts-PfavaBBA&usqp=CAU">
+                <img alt="imagem de gatinho" src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTohIHVxx70U8hz2Lx4TIzeB1cts-PfavaBBA&usqp=CAU">
+                <img alt="imagem de gatinho" src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTohIHVxx70U8hz2Lx4TIzeB1cts-PfavaBBA&usqp=CAU">
+            </div>
+            <div class="mt-5 d-flex justify-content-between videos">
+                <video width="320" height="240" controls>
+                    <source src="https://youtu.be/XiCknbJQCyk" type="video/mp4">
+                </video>
+                <video width="320" height="240" controls>
+                    <source src="https://youtu.be/XiCknbJQCyk" type="video/mp4">
+                </video>
+                <video width="320" height="240" controls>
+                    <source src="https://youtu.be/XiCknbJQCyk" type="video/mp4">
+                </video>
+            </div>
+        </div>
     </div>
-
 </body>
 </html>
