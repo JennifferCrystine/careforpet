@@ -10,11 +10,11 @@ import javax.persistence.Id;
 
 @Getter
 @Setter
-@Entity(name="usuario")
+@Entity(name = "usuario")
 public class Usuario {
 
     @Id
-    @GeneratedValue(strategy= GenerationType.IDENTITY)
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
     private String email;
