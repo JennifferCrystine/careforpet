@@ -1,0 +1,19 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" xmlns:th="https://www.thymeleaf.org"
+      xmlns:sec="https://www.thymeleaf.org/thymeleaf-extras-springsecurity3">
+<head>
+  <title th:text="${pagina + ' Hospedagem'}"></title>
+</head>
+<body>
+
+<span th:if="${errorMessage}"  th:text="${errorMessage}">Error</span>
+
+<form th:action="@{/hospedagem/cadastrar}" method="post" th:object="${hospedagem}">
+  <div><label> Nome : <input type="text" th:field="*{nome}"/> </label></div>
+  <div><label> chavePix: <input type="text" th:field="*{chavePix}"/> </label></div>
+  <div><label> valorDiaria: <input type="text" th:field="*{valorDiaria}"/> </label></div>
+  <input th:type="hidden" th:field="*{usuarioId}">
+  <div><input type="submit" value="Cadastrar"/></div>
+</form>
+</body>
+</html>
