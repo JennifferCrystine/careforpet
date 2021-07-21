@@ -13,7 +13,7 @@
 
   <ul>
       <th:block th:each="h : ${hospedagens}">
-        <a th:href="${'/hospedagem/atualizar/' + h.id}"><li th:text="${h.nome}"></li></a>
+        <a th:href="${'/hospedagem/reservar/' + h.id}"><li th:text="${h.nome}"></li></a>
       </th:block>
   </ul>
 </body>
