@@ -1,5 +1,6 @@
 package com.gpms.petcare.controller;
 
+import com.gpms.petcare.model.Adocao;
 import com.gpms.petcare.model.Pet;
 import com.gpms.petcare.repository.AdocaoRepository;
 import com.gpms.petcare.service.AdocaoService;
@@ -25,9 +26,15 @@ public class AdocaoController {
 
 
 
-    @PostMapping("/cadastra")
+    @PostMapping("/cadastraPet")
     public ResponseEntity<Pet> cadastraNovoPet(@RequestParam String nome, @RequestParam String raça) throws Exception {
 
         return ResponseEntity.ok().body(adocaoService.cadastraNovoPet(nome,raça));
+    }
+
+    @PostMapping("/adotaPet")
+    public ResponseEntity<Adocao> adotaPetPorId(@RequestParam Long id) throws Exception {
+
+        return ResponseEntity.ok().body(adocaoService.adotaPet(id, usuarioLogadoSession.getEmail()));
     }
 }
