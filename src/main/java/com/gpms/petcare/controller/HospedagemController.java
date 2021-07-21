@@ -1,9 +1,13 @@
 package com.gpms.petcare.controller;
 
+import com.gpms.petcare.dto.ReservaResponseDTO;
 import com.gpms.petcare.model.Hospedagem;
 import com.gpms.petcare.service.HospedagemService;
 import com.gpms.petcare.session.UsuarioLogadoSession;
 import com.gpms.petcare.validator.HospedagemValidator;
+import org.joda.time.Days;
+import org.joda.time.Instant;
+import org.joda.time.Interval;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -11,9 +15,13 @@ import org.springframework.validation.Errors;
 import org.springframework.web.bind.annotation.*;
 
 import javax.servlet.http.HttpServletRequest;
+import java.text.DecimalFormat;
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
+import java.util.Date;
 import java.util.List;
-import java.util.Locale;
 import java.util.Objects;
+import java.util.concurrent.TimeUnit;
 
 @Controller
 @RequestMapping("/hospedagem")
@@ -86,6 +94,37 @@ public class HospedagemController {
         model.addAttribute("pagina", "atualizar");
 
         return "hospedagem/cadastrar-editar";
+    }
+
+    @GetMapping("/reservar/{id}")
+    public String reservar(@PathVariable Long id, Model model) {
+
+        Hospedagem hospedagem = hospedagemService.getById(id).get();
+
+        model.addAttribute("hospedagem", hospedagem);
+
+
+        return "hospedagem/reservar";
+    }
+
+    @GetMapping("reservar")
+    @ResponseBody
+    public ReservaResponseDTO reservar(@RequestParam Long id,
+                                       @RequestParam String dataInicio,
+                                       @RequestParam String dataFinal) throws ParseException {
+        Hospedagem hospedagem = hospedagemService.getById(id).get();
+        SimpleDateFormat sdf = new SimpleDateFormat("dd/MM/yyyy");
+        Date inicio = sdf.parse(dataInicio);
+        Date finale = sdf.parse(dataFinal);
+        long diffInMillies = Math.abs(finale.getTime() - inicio.getTime());
+        long dias = TimeUnit.DAYS.convert(diffInMillies, TimeUnit.MILLISECONDS);
+        double valorTotal = dias*hospedagem.getValorDiaria();
+        ReservaResponseDTO dto = new ReservaResponseDTO();
+        dto.setValor(new DecimalFormat("#,##0.00").format(valorTotal));
+        dto.setChavePix(hospedagem.getChavePix());
+
+        return dto;
+
     }
 
     @PostMapping("/atualizar")

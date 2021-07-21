@@ -1,0 +1,23 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" xmlns:th="https://www.thymeleaf.org"
+      xmlns:sec="https://www.thymeleaf.org/thymeleaf-extras-springsecurity3">
+<head>
+  <title>Hospedagem</title>
+</head>
+<body>
+<h1> Reservar Hospedagem </h1>
+
+<form th:object="${hospedagem}">
+  <div><label th:text="*{'Nome:' + nome}"></label></div>
+  <div><label th:text="*{'Nome:' + valorDiaria}"></label></div>
+  <input th:type="text" id="dataInicio">
+  <input th:type="text" id="dataFinal">
+  <input type="hidden" id="id" th:value="${hospedagem.id}">
+  <div><button type="button" id="reservar-button"/>Reservar</div>
+  <div id="pagar-div">
+  </div>
+</form>
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+<script src="/js/hospedagem/reservar.js"></script>
+</body>
+</html>
