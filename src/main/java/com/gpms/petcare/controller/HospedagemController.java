@@ -8,9 +8,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.Errors;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.*;
 
 import javax.servlet.http.HttpServletRequest;
 import java.util.List;
@@ -31,9 +29,9 @@ public class HospedagemController {
     private HospedagemService hospedagemService;
 
     @GetMapping("/listar")
-    public String listarHospedagens(Model model) {
+    public String listarHospedagens(Model model, @RequestParam(required = false) String sucesso) {
         List<Hospedagem> hospedagens = hospedagemService.getAll();
-
+        model.addAttribute("colocarMensagemSucesso", !Objects.isNull(sucesso));
         model.addAttribute("hospedagens", hospedagens);
 
         return "hospedagem/listar";
@@ -47,6 +45,7 @@ public class HospedagemController {
         Hospedagem hospedagem = new Hospedagem();
         hospedagem.setUsuarioId(usuarioId);
         model.addAttribute("hospedagem", hospedagem);
+        model.addAttribute("pagina", "cadastrar");
 
 
         return "hospedagem/cadastrar-editar";
@@ -67,39 +66,52 @@ public class HospedagemController {
         validator.validate(hospedagem, errors);
 
         if (errors.getErrorCount() - menosErro > 0) {
-            model.addAttribute("pagina", "Cadastrar");
+            model.addAttribute("pagina", "cadastrar");
             model.addAttribute("errorMessage", "erro ao cadastrar hospedagem");
             model.addAttribute("hospedagem", hospedagem);
             return "hospedagem/cadastrar-editar";
         }
 
         hospedagemService.criarHospedagem(hospedagem);
-        return null;
+
+        return "redirect:/hospedagem/listar?sucesso";
     }
 
-    @GetMapping("/atualizar")
-    public String atualizar(Long id, Model model) {
+    @GetMapping("/atualizar/{id}")
+    public String atualizar(@PathVariable Long id, Model model) {
 
         Hospedagem hospedagem = hospedagemService.getById(id).get();
 
         model.addAttribute("hospedagem", hospedagem);
+        model.addAttribute("pagina", "atualizar");
 
         return "hospedagem/cadastrar-editar";
     }
 
     @PostMapping("/atualizar")
-    public String atualizar(Hospedagem hospedagem, Model model, Errors errors) {
+    public String atualizar(Hospedagem hospedagem, Model model, Errors errors, HttpServletRequest request) {
+
+        int menosErro = 0;
+        if (Objects.isNull(hospedagem.getValorDiaria())) {
+            String paramValorDiaria = request.getParameter("valorDiaria");
+            String regex = "\\d+,\\d+";
+            if (!Objects.isNull(paramValorDiaria) && paramValorDiaria.matches(regex)) {
+                hospedagem.setValorDiaria(Double.parseDouble(paramValorDiaria.replaceAll(",", ".")));
+                menosErro = 1;
+            }
+        }
 
         validator.validate(hospedagem, errors);
 
-        if (errors.hasErrors()) {
-            model.addAttribute("pagina", "Atualizar");
-            model.addAttribute("errorMessage", "erro ao cadastrar hospedagem");
+        if (errors.getErrorCount() - menosErro > 0) {
+            model.addAttribute("pagina", "atualizar");
+            model.addAttribute("errorMessage", "erro ao atualizar hospedagem");
             model.addAttribute("hospedagem", hospedagem);
             return "hospedagem/cadastrar-editar";
         }
 
         hospedagemService.atualizarHospedagem(hospedagem);
-        return null;
+
+        return "redirect:/hospedagem/listar?sucesso";
     }
 }
