@@ -7,8 +7,14 @@
     <title>Hospedagens</title>
 </head>
 <body>
-  <ul th:each="h : ${hospedagens}">
-    <li th:text="${h.nome}"></li>
+<th:block th:if="${colocarMensagemSucesso}">
+    <span><b>Operação realizada com sucesso!</b></span>
+</th:block>
+
+  <ul>
+      <th:block th:each="h : ${hospedagens}">
+        <a th:href="${'/hospedagem/atualizar/' + h.id}"><li th:text="${h.nome}"></li></a>
+      </th:block>
   </ul>
 </body>
 </html>
