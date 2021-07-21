@@ -2,6 +2,7 @@ package com.gpms.petcare.security;
 
 import com.gpms.petcare.model.Usuario;
 import com.gpms.petcare.service.UsuarioService;
+import com.gpms.petcare.session.UsuarioLogadoSession;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.authentication.AuthenticationProvider;
 import org.springframework.security.authentication.BadCredentialsException;
@@ -25,6 +26,9 @@ public class CustomAuthenticationProvider implements AuthenticationProvider {
     @Autowired
     private UsuarioService usuarioService;
 
+    @Autowired
+    private UsuarioLogadoSession usuarioLogadoSession;
+
     @Override
     public Authentication authenticate(Authentication authentication) throws AuthenticationException {
 
@@ -47,6 +51,9 @@ public class CustomAuthenticationProvider implements AuthenticationProvider {
         User springSecurityUser = new User(email, "", grantedAuthorities);
 
         Authentication auth = new UsernamePasswordAuthenticationToken(springSecurityUser, senha, springSecurityUser.getAuthorities());
+
+        usuarioLogadoSession.setId(usuario.getId());
+        usuarioLogadoSession.setEmail(usuario.getEmail());
 
         return auth;
 
