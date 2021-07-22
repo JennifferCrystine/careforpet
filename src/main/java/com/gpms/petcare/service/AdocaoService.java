@@ -6,6 +6,8 @@ import com.gpms.petcare.model.Usuario;
 import com.gpms.petcare.repository.AdocaoRepository;
 import com.gpms.petcare.repository.PetRepository;
 import com.gpms.petcare.repository.UsuarioRepository;
+import java.util.ArrayList;
+import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -46,5 +48,25 @@ public class AdocaoService {
         }
         return adotado;
     }
- }
+
+    public List<Pet> listaPet() {
+        List<Pet> pet = new ArrayList<>();
+        try {
+          pet = petRepository.findAll();
+        }catch (Exception e){
+            e.printStackTrace();
+        }
+        return pet;
+    }
+
+    public List<Adocao> listaAdotado() {
+        List<Adocao> adotados = new ArrayList<>();
+        try {
+            adotados = adocaoRepository.findAll();
+        }catch (Exception e){
+            e.printStackTrace();
+        }
+        return adotados;
+    }
+}
 

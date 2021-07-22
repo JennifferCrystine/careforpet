@@ -6,6 +6,7 @@ import com.gpms.petcare.repository.AdocaoRepository;
 import com.gpms.petcare.service.AdocaoService;
 import com.gpms.petcare.session.UsuarioLogadoSession;
 import com.sun.istack.NotNull;
+import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
@@ -25,7 +26,14 @@ public class AdocaoController {
     private AdocaoService adocaoService;
 
 
-
+    @GetMapping("/listaPet")
+    public ResponseEntity<List<Pet>> listaPet(){
+        return ResponseEntity.ok().body(adocaoService.listaPet());
+    }
+    @GetMapping("/listaPetAdotado")
+    public ResponseEntity<List<Adocao>> listaAdotado(){
+        return ResponseEntity.ok().body(adocaoService.listaAdotado());
+    }
     @PostMapping("/cadastraPet")
     public ResponseEntity<Pet> cadastraNovoPet(@RequestParam String nome, @RequestParam String raça) throws Exception {
 
