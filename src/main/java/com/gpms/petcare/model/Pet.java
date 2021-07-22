@@ -1,12 +1,8 @@
 package com.gpms.petcare.model;
 
-import javax.persistence.*;
+import lombok.*;
 
-import lombok.AllArgsConstructor;
-import lombok.Getter;
-import lombok.NoArgsConstructor;
-import lombok.NonNull;
-import lombok.Setter;
+import javax.persistence.*;
 
 @Getter
 @Setter
@@ -24,5 +20,5 @@ public class Pet {
     private String nome;
 
     @Column
-    private String raça;
+    private String raca;
 }

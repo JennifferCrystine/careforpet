@@ -1,0 +1,21 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" xmlns:th="https://www.thymeleaf.org"
+>
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+
+<th:block th:if="${mostrarMensagemErro}">
+    <span><b>Erro!</b></span>
+</th:block>
+
+  <form th:object="${pet}" th:action="@{/adocao/adotaPet}" method="post">
+    <div><label th:text="*{'Nome:' + nome}"></label></div>
+    <div><label th:text="*{'Raça:' + raca}"></label></div>
+    <input type="hidden" id="id" name="id" th:value="${pet.id}">
+    <div><button type="submit" id="reservar-button"/>adotar</div>
+  </form>
+</body>
+</html>

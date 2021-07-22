@@ -1,19 +1,15 @@
 package com.gpms.petcare.controller;
 
-import com.gpms.petcare.model.Adocao;
 import com.gpms.petcare.model.Pet;
-import com.gpms.petcare.repository.AdocaoRepository;
 import com.gpms.petcare.service.AdocaoService;
 import com.gpms.petcare.session.UsuarioLogadoSession;
-import com.sun.istack.NotNull;
-import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.ui.Model;
+import org.springframework.web.bind.annotation.*;
+
+import java.util.List;
+import java.util.Objects;
 
 @Controller
 @RequestMapping("/adocao")
@@ -27,22 +23,63 @@ public class AdocaoController {
 
 
     @GetMapping("/listaPet")
-    public ResponseEntity<List<Pet>> listaPet(){
-        return ResponseEntity.ok().body(adocaoService.listaPet());
+    public String listaPet(Model model, @RequestParam(required = false) String sucesso){
+
+        List<Pet> pets = adocaoService.listaPet();
+
+        model.addAttribute("pets", pets);
+        model.addAttribute("colocarMensagemSucesso", !Objects.isNull(sucesso));
+
+
+        return "adocao/lista-pet";
     }
     @GetMapping("/listaPetAdotado")
-    public ResponseEntity<List<Adocao>> listaAdotado(){
-        return ResponseEntity.ok().body(adocaoService.listaAdotado());
-    }
-    @PostMapping("/cadastraPet")
-    public ResponseEntity<Pet> cadastraNovoPet(@RequestParam String nome, @RequestParam String raça) throws Exception {
+    public String listaAdotado(Model model){
 
-        return ResponseEntity.ok().body(adocaoService.cadastraNovoPet(nome,raça));
+        model.addAttribute("petsAdotados", adocaoService.listaAdotado());
+        return "adocao/lista-pet";
+    }
+
+    @GetMapping("/cadastraPet")
+    public String cadastraPet(Model model) {
+        model.addAttribute("pet", new Pet());
+
+        return "adocao/cadastrar";
+    }
+
+    @PostMapping("/cadastraPet")
+    public String cadastraNovoPet(Pet pet, Model model) {
+
+        try {
+            adocaoService.cadastraNovoPet(pet.getNome(),pet.getRaca());
+        } catch (Exception e) {
+            model.addAttribute(pet);
+            return "adocao/lista-pet";
+        }
+
+        return "redirect:/adocao/listaPet?sucesso";
+    }
+
+    @GetMapping("/adotaPet/{id}")
+    public String adotaPet(Model model, @PathVariable Long id, @RequestParam(required = false) String erro) {
+
+        model.addAttribute("mostrarMensagemErro", !Objects.isNull(erro));
+
+        Pet pet = adocaoService.buscaPetPorId(id);
+        model.addAttribute(pet);
+
+        return "adocao/mostra-pet";
     }
 
     @PostMapping("/adotaPet")
-    public ResponseEntity<Adocao> adotaPetPorId(@RequestParam Long id) throws Exception {
+    public String adotaPetPorId(@RequestParam Long id, Model model) throws Exception {
 
-        return ResponseEntity.ok().body(adocaoService.adotaPet(id, usuarioLogadoSession.getEmail()));
+        try {
+            adocaoService.adotaPet(id, usuarioLogadoSession.getEmail());
+        } catch (Exception e) {
+            return "adocao/mostra-pet/" + id + "?erro";
+        }
+
+        return "redirect:/adocao/listaPet?sucesso";
     }
 }

@@ -6,10 +6,11 @@ import com.gpms.petcare.model.Usuario;
 import com.gpms.petcare.repository.AdocaoRepository;
 import com.gpms.petcare.repository.PetRepository;
 import com.gpms.petcare.repository.UsuarioRepository;
-import java.util.ArrayList;
-import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+
+import java.util.ArrayList;
+import java.util.List;
 
 @Service
 public class AdocaoService {
@@ -23,14 +24,14 @@ public class AdocaoService {
     @Autowired
     private PetRepository petRepository;
 
-    public Pet cadastraNovoPet(String nome, String raça) throws Exception {
+    public Pet cadastraNovoPet(String nome, String raca) throws Exception {
         if (nome == null){
           throw new Exception("nome nao pode ser nulo");
         }
         else {
         Pet pet = new Pet();
         pet.setNome(nome);
-        pet.setRaça(raça);
+        pet.setRaca(raca);
         Pet novoPet = petRepository.save(pet);
         return novoPet ;
         }
@@ -67,6 +68,10 @@ public class AdocaoService {
             e.printStackTrace();
         }
         return adotados;
+    }
+
+    public Pet buscaPetPorId(Long id) {
+        return petRepository.getById(id);
     }
 }
 

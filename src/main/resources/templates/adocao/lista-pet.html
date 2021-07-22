@@ -4,17 +4,18 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <title>Hospedagens</title>
+    <title>Title</title>
 </head>
 <body>
+
 <th:block th:if="${colocarMensagemSucesso}">
     <span><b>Operação realizada com sucesso!</b></span>
 </th:block>
 
-  <ul>
-      <th:block th:each="h : ${hospedagens}">
-        <a th:href="${'/hospedagem/reservar/' + h.id}"><li th:text="${h.nome}"></li></a>
-      </th:block>
-  </ul>
+<ul>
+    <th:block th:each="p : ${pets}">
+        <a><li th:text="${p.nome}"></li></a>
+    </th:block>
+</ul>
 </body>
 </html>
