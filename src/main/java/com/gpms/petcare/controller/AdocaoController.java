@@ -51,7 +51,7 @@ public class AdocaoController {
     public String cadastraNovoPet(Pet pet, Model model) {
 
         try {
-            adocaoService.cadastraNovoPet(pet.getNome(),pet.getRaca());
+            adocaoService.cadastraNovoPet(pet.getNome(),pet.getRaca(),pet.getEndereco());
         } catch (Exception e) {
             model.addAttribute(pet);
             return "adocao/lista-pet";
