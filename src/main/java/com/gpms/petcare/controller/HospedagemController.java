@@ -104,7 +104,7 @@ public class HospedagemController {
         return "hospedagem/reservar";
     }
 
-    @GetMapping("reservar")
+    @GetMapping("/reservar")
     @ResponseBody
     public ReservaResponseDTO reservar(@RequestParam Long id,
                                        @RequestParam String dataInicio,

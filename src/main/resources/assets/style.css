@@ -1,0 +1,272 @@
+/*
+1 - General
+2 - Navigation
+3 - Header
+4 - Blog posts section
+5 - Authorized Users
+*/
+
+/*
+1 - General
+ ######   ######## ##    ## ######## ########     ###    ##
+##    ##  ##       ###   ## ##       ##     ##   ## ##   ##
+##        ##       ####  ## ##       ##     ##  ##   ##  ##
+##   #### ######   ## ## ## ######   ########  ##     ## ##
+##    ##  ##       ##  #### ##       ##   ##   ######### ##
+##    ##  ##       ##   ### ##       ##    ##  ##     ## ##
+ ######   ######## ##    ## ######## ##     ## ##     ## ########
+*/
+
+/*Fonts*/
+@font-face {
+    font-family: "OpenSans-SemiBold";
+    src: url('https://fonts.googleapis.com/css2?family=Open+Sans:ital,wght@0,400;0,600;0,700;0,800;1,300&display=swap');
+}
+
+@font-face {
+    font-family: "OpenSans-Bold";
+    src: url('https://fonts.googleapis.com/css2?family=Open+Sans:ital,wght@0,400;0,700;0,800;1,300&display=swap');
+}
+
+@font-face {
+    font-family: "OpenSans-ExtraBold";
+    src: url('https://fonts.googleapis.com/css2?family=Open+Sans:ital,wght@0,400;0,800;1,300&display=swap');
+}
+
+@font-face {
+    font-family: "OpenSans-Italic";
+    src: url('https://fonts.googleapis.com/css2?family=Open+Sans:ital,wght@0,400;1,300&display=swap');
+}
+
+@font-face {
+    font-family: "OpenSans-Regular";
+    src: url('https://fonts.googleapis.com/css2?family=Open+Sans&display=swap');
+}
+
+body {
+    font-size: 18px;
+    color: #212529;
+    font-family: 'OpenSans-Regular';
+    min-height:100vh;
+    margin:0;
+}
+
+h1{
+    font-family: 'OpenSans-Bold';
+}
+
+/* Footer*/
+footer {
+    margin-top:30px;
+    height: 50px;
+    bottom: 0;
+    width: 100%;
+}
+
+footer .copyright {
+    text-align: center;
+    font-size: 14px;
+}
+
+/*
+2 - Navigation
+ #    #   ##   #    # #  ####    ##   ##### #  ####  #    #
+ ##   #  #  #  #    # # #    #  #  #    #   # #    # ##   #
+ # #  # #    # #    # # #      #    #   #   # #    # # #  #
+ #  # # ###### #    # # #  ### ######   #   # #    # #  # #
+ #   ## #    #  #  #  # #    # #    #   #   # #    # #   ##
+ #    # #    #   ##   #  ####  #    #   #   #  ####  #    #
+*/
+
+#mainNav {
+    position: absolute;
+    border-bottom: 1px solid #e9ecef;
+    background-color: white;
+}
+
+#mainNav .navbar-brand {
+    font-weight: 850;
+    color: #343a40;
+}
+
+#mainNav .navbar-toggler {
+    font-size: 12px;
+    font-weight: 800;
+    padding: 13px;
+    text-transform: uppercase;
+    color: #343a40;
+}
+
+#mainNav .navbar-nav > li.nav-item > a {
+    font-size: 12px;
+    font-weight: 800;
+    letter-spacing: 1px;
+    text-transform: uppercase;
+}
+
+@media only screen and (min-width: 992px) {
+    #mainNav {
+        border-bottom: 1px solid transparent;
+        background: transparent;
+        transition: background-color 0.2s;
+    }
+    #mainNav .nav-home{
+        color: #fff;
+    }
+    #mainNav .navbar-nav-home> li.nav-item > a {
+        padding: 10px 20px;
+        color: #fff;
+    }
+}
+
+@media only screen and (min-width: 992px) {
+
+    #mainNav .nav-post {
+        color: #555555;
+    }
+    #mainNav .nav-post > li.nav-item > a {
+        color: #555555;
+        padding: 10px 20px;
+    }
+}
+
+/*
+3 - Header
+##     ## ########    ###    ########  ######## ########
+##     ## ##         ## ##   ##     ## ##       ##     ##
+##     ## ##        ##   ##  ##     ## ##       ##     ##
+######### ######   ##     ## ##     ## ######   ########
+##     ## ##       ######### ##     ## ##       ##   ##
+##     ## ##       ##     ## ##     ## ##       ##    ##
+##     ## ######## ##     ## ########  ######## ##     ##
+*/
+header.masthead {
+    margin-bottom: 50px;
+    background: no-repeat center center;
+    background-color: #868e96;
+    background-attachment: scroll;
+    position: relative;
+    background-size: cover;
+}
+
+header.masthead-post{
+    margin-bottom: 50px;
+    position: relative;
+}
+
+header.masthead .overlay {
+    position: absolute;
+    top: 0;
+    left: 0;
+    height: 100%;
+    width: 100%;
+    background-color: #212529;
+    opacity: 0.5;
+}
+
+header.masthead .page-heading,
+header.masthead .post-heading,
+header.masthead .site-heading {
+    padding: 200px 0 150px;
+    color: white;
+}
+
+header.masthead-post .post-heading {
+    padding: 100px 0 100px;
+}
+
+header.masthead-post .post-heading .subheading{
+    color: #555555;
+}
+
+@media only screen and (min-width: 768px) {
+    header.masthead .page-heading,
+    header.masthead .post-heading,
+    header.masthead .site-heading{
+        padding: 100px 0;
+    }
+    header.masthead-post .post-heading {
+        padding: 100px 0 0;
+    }
+}
+
+header.masthead .page-heading,
+header.masthead .site-heading {
+    text-align: center;
+}
+
+header.masthead-post .post-heading {
+    text-align: left;
+}
+
+header.masthead .page-heading h1,
+header.masthead .site-heading h1,
+header.masthead-post .post-heading h1 {
+    font-size: 50px;
+    margin-top: 0;
+}
+
+header.masthead .page-heading .subheading {
+    font-size: 18px;
+    font-weight: 300;
+    color: #555555;
+}
+header.masthead .site-heading .subheading {
+    font-size: 18px;
+    font-weight: 300;
+    color: white;
+}
+
+@media only screen and (min-width: 768px) {
+    header.masthead .page-heading h1,
+    header.masthead .site-heading h1,
+    header.masthead-post .post-heading {
+        font-size: 80px;
+    }
+}
+
+header.masthead .post-heading h1,
+header.masthead-post .post-heading {
+    font-size: 35px;
+}
+
+header.masthead .post-heading .meta,
+header.masthead .post-heading .subheading {
+    line-height: 1.1;
+    display: block;
+    color: #555555;
+}
+
+header.masthead-post .post-heading .meta {
+    line-height: 2.5;
+    display: block;
+}
+
+header.masthead .post-heading,
+header.masthead-post .post-heading {
+    font-size: 24px;
+    font-weight: 600;
+    margin: 10px 0 30px;
+    font-family: 'Open Sans', 'Helvetica Neue', Helvetica, Arial, sans-serif;
+}
+
+header.masthead .post-heading .meta,
+header.masthead-post .post-heading .meta {
+    font-size: 20px;
+    font-weight: 300;
+    font-style: italic;
+    font-family: 'Lora', 'Times New Roman', serif;
+}
+
+header.masthead .post-heading .meta a {
+    color: #fff;
+}
+
+@media only screen and (min-width: 768px) {
+    header.masthead .post-heading h1 {
+        font-size: 55px;
+    }
+    header.masthead .post-heading .subheading {
+        font-size: 30px;
+    }
+}

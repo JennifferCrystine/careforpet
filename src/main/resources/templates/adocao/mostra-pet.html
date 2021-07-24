@@ -1,21 +1,66 @@
 <!DOCTYPE html>
-<html xmlns="http://www.w3.org/1999/xhtml" xmlns:th="https://www.thymeleaf.org"
->
+<html lang="pt" xmlns="http://www.w3.org/1999/xhtml" xmlns:th="https://www.thymeleaf.org">
 <head>
     <meta charset="UTF-8">
-    <title>Title</title>
+    <!--    <link th:rel="stylesheet" th:href="@{webjars/bootstrap/5.0.0/css/bootstrap.min.css} "/>-->
+    <title>Adoção</title>
 </head>
 <body>
-
-<th:block th:if="${mostrarMensagemErro}">
-    <span><b>Erro!</b></span>
-</th:block>
-
-  <form th:object="${pet}" th:action="@{/adocao/adotaPet}" method="post">
-    <div><label th:text="*{'Nome:' + nome}"></label></div>
-    <div><label th:text="*{'Raça:' + raca}"></label></div>
-    <input type="hidden" id="id" name="id" th:value="${pet.id}">
-    <div><button type="submit" id="reservar-button"/>adotar</div>
-  </form>
+<div th:replace="~{fragments/header :: header}"></div>
+<div class="container">
+    <h1 class="mt-3 text-center" th:text="${pet.nome}"></h1>
+    <div class="row">
+        <div class="col-3 img-wrapper">
+            <img alt="imagem de gatinho"
+                 src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTohIHVxx70U8hz2Lx4TIzeB1cts-PfavaBBA&usqp=CAU">
+            <div class="mt-2 pet-infos">
+                <p  th:text="${'Raça' + pet.raca}"></p>
+                <p>Idade: 7 anos</p>
+                <p class="row-cols-2">Endereço: Rua dos Bobos, 123 - Flamengo, Rio de Janeiro</p>
+            </div>
+            <form th:object="${pet}" th:action="@{/adocao/adotaPet}" method="post">
+                <input type="hidden" id="id" name="id" th:value="${pet.id}">
+                <div><button class="mb-2 btn btn-primary" type="submit" id="reservar-button"/>Adote</div>
+            </form>
+        </div>
+        <div class="col-9 d-flex align-content-center info-wrapper">
+            <p>
+                Brownie pudding macaroon fruitcake dessert tiramisu chupa chups sweet.
+                Sugar plum dragée croissant cookie muffin cake apple pie gummi bears.
+                Icing topping cake croissant gummi bears. Powder sweet roll soufflé halvah lemon drops tart.
+                Gingerbread powder donut candy dragée.
+                Cookie gummies topping jelly brownie chocolate cake jelly-o.
+                Icing icing marshmallow pie ice cream marshmallow brownie.
+                Brownie pudding macaroon fruitcake dessert tiramisu chupa chups sweet.
+                Sugar plum dragée croissant cookie muffin cake apple pie gummi bears.
+                Chocolate cake dragée tootsie roll chocolate tootsie roll gummies.
+                Cupcake jelly-o caramels.
+            </p>
+        </div>
+    </div>
+    <div class="medias">
+        <div class="d-flex justify-content-between images">
+            <img alt="imagem de gatinho"
+                 src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTohIHVxx70U8hz2Lx4TIzeB1cts-PfavaBBA&usqp=CAU">
+            <img alt="imagem de gatinho"
+                 src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTohIHVxx70U8hz2Lx4TIzeB1cts-PfavaBBA&usqp=CAU">
+            <img alt="imagem de gatinho"
+                 src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTohIHVxx70U8hz2Lx4TIzeB1cts-PfavaBBA&usqp=CAU">
+            <img alt="imagem de gatinho"
+                 src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTohIHVxx70U8hz2Lx4TIzeB1cts-PfavaBBA&usqp=CAU">
+        </div>
+        <div class="mt-5 d-flex justify-content-between videos">
+            <video width="320" height="240" controls>
+                <source src="https://youtu.be/XiCknbJQCyk" type="video/mp4">
+            </video>
+            <video width="320" height="240" controls>
+                <source src="https://youtu.be/XiCknbJQCyk" type="video/mp4">
+            </video>
+            <video width="320" height="240" controls>
+                <source src="https://youtu.be/XiCknbJQCyk" type="video/mp4">
+            </video>
+        </div>
+    </div>
+</div>
 </body>
 </html>

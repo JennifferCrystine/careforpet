@@ -22,7 +22,7 @@ public class AdocaoController {
     private AdocaoService adocaoService;
 
 
-    @GetMapping("/listaPet")
+    @GetMapping("/disponiveis")
     public String listaPet(Model model, @RequestParam(required = false) String sucesso){
 
         List<Pet> pets = adocaoService.listaPet();
@@ -33,7 +33,7 @@ public class AdocaoController {
 
         return "adocao/lista-pet";
     }
-    @GetMapping("/listaPetAdotado")
+    @GetMapping("/adotados")
     public String listaAdotado(Model model){
 
         model.addAttribute("petsAdotados", adocaoService.listaAdotado());
@@ -60,7 +60,7 @@ public class AdocaoController {
         return "redirect:/adocao/listaPet?sucesso";
     }
 
-    @GetMapping("/adotaPet/{id}")
+    @GetMapping("/adotar/{id}")
     public String adotaPet(Model model, @PathVariable Long id, @RequestParam(required = false) String erro) {
 
         model.addAttribute("mostrarMensagemErro", !Objects.isNull(erro));
@@ -68,7 +68,7 @@ public class AdocaoController {
         Pet pet = adocaoService.buscaPetPorId(id);
         model.addAttribute(pet);
 
-        return "adocao/mostra-pet";
+        return "adocao/adote";
     }
 
     @PostMapping("/adotaPet")
@@ -77,9 +77,9 @@ public class AdocaoController {
         try {
             adocaoService.adotaPet(id, usuarioLogadoSession.getEmail());
         } catch (Exception e) {
-            return "adocao/mostra-pet/" + id + "?erro";
+            return "adocao/adote/" + id + "?erro";
         }
 
-        return "redirect:/adocao/listaPet?sucesso";
+        return "redirect:/adocao/adote?sucesso";
     }
 }
