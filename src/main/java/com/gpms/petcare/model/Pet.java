@@ -23,6 +23,9 @@ public class Pet {
     private String raca;
 
     @Column
+    private int idade;
+
+    @Column
     private String endereco;
 
     @Column

@@ -13,7 +13,7 @@
     You have been logged out.
 </div>
     <div class="container">
-        <form th:action="@{/login}" method="post">
+        <form class="mt-5" th:action="@{/login}" method="post">
             <div class="mb-3">
                 <label class="form-label">Usuário</label>
                 <input class="form-control" type="text" name="username" placeholder="Insira seu nome de usuário"/>
@@ -23,7 +23,7 @@
                 <input class="form-control" type="password" name="password" placeholder="Insira sua senha"/>
             </div>
             <div class="mb-3">
-                <input type="submit" value="Entre"/>
+                <input class="btn btn-primary" type="submit" value="Entre"/>
             </div>
         </form>
         <div>

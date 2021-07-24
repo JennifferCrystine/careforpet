@@ -25,7 +25,7 @@ public class AdocaoService {
     @Autowired
     private PetRepository petRepository;
 
-    public Pet cadastraNovoPet(String nome, String raca, String endereco) throws Exception {
+    public Pet cadastraNovoPet(String nome, String raca, String endereco, int idade) throws Exception {
         if (nome == null){
           throw new Exception("nome nao pode ser nulo");
         }
