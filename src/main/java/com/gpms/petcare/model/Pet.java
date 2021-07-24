@@ -21,4 +21,10 @@ public class Pet {
 
     @Column
     private String raca;
+
+    @Column
+    private String endereco;
+
+    @Column
+    private boolean adotado = false;
 }
