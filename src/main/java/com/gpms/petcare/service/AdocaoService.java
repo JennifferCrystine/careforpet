@@ -1,5 +1,6 @@
 package com.gpms.petcare.service;
 
+import com.gpms.petcare.exception.PetException;
 import com.gpms.petcare.model.Adocao;
 import com.gpms.petcare.model.Pet;
 import com.gpms.petcare.model.Usuario;
@@ -24,7 +25,7 @@ public class AdocaoService {
     @Autowired
     private PetRepository petRepository;
 
-    public Pet cadastraNovoPet(String nome, String raca) throws Exception {
+    public Pet cadastraNovoPet(String nome, String raca, String endereco) throws Exception {
         if (nome == null){
           throw new Exception("nome nao pode ser nulo");
         }
@@ -32,6 +33,7 @@ public class AdocaoService {
         Pet pet = new Pet();
         pet.setNome(nome);
         pet.setRaca(raca);
+        pet.setEndereco(endereco);
         Pet novoPet = petRepository.save(pet);
         return novoPet ;
         }
@@ -42,8 +44,12 @@ public class AdocaoService {
         try {
             Usuario usuario = usuarioRepository.findByEmail(usuarioLogado).orElseThrow();
             Pet pet = petRepository.getById(id);
+            if (pet.isAdotado()){
+                throw new PetException("Pet não disponível pra adoção");
+            }
+            pet.setAdotado(true);
             Adocao adocao = new Adocao(pet, usuario);
-             adotado = adocaoRepository.save(adocao);
+            adotado = adocaoRepository.save(adocao);
         } catch (Exception e) {
             e.printStackTrace();
         }
@@ -53,7 +59,7 @@ public class AdocaoService {
     public List<Pet> listaPet() {
         List<Pet> pet = new ArrayList<>();
         try {
-          pet = petRepository.findAll();
+          pet = petRepository.findAllByAdotadoFalse();
         }catch (Exception e){
             e.printStackTrace();
         }
