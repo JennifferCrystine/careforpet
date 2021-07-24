@@ -9,6 +9,7 @@
 <form th:action="${'/adocao/cadastraPet'}" method="post" th:object="${pet}">
   <div><label> Nome : <input type="text" th:field="*{nome}"/> </label></div>
   <div><label> Raça: <input type="text" th:field="*{raca}"/> </label></div>
+  <div><label> Idade: <input type="int" th:field="*{idade}"/> </label></div>
 
   <button th:text="Cadastrar"></button>
 </form>

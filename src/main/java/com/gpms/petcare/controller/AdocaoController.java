@@ -57,7 +57,7 @@ public class AdocaoController {
             return "adocao/lista-pet";
         }
 
-        return "redirect:/adocao/listaPet?sucesso";
+        return "redirect:/adocao/disponiveis?sucesso";
     }
 
     @GetMapping("/adotar/{id}")
