@@ -18,14 +18,15 @@ public class Adocao {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
-    public Adocao(Pet pet, Usuario usuario) {
-        this.pet = pet;
-        this.usuario = usuario;
-    }
-
     @ManyToOne
     private Pet pet;
 
     @ManyToOne
     private Usuario usuario;
+
+
+    public Adocao(Pet pet, Usuario usuario) {
+        this.pet = pet;
+        this.usuario = usuario;
+    }
 }

@@ -21,7 +21,7 @@ public class AdocaoController {
     @Autowired
     private AdocaoService adocaoService;
 
-
+    //mostra pets disponíveis para adoção
     @GetMapping("/disponiveis")
     public String listaPet(Model model, @RequestParam(required = false) String sucesso){
 
@@ -33,6 +33,8 @@ public class AdocaoController {
 
         return "adocao/lista-pet";
     }
+
+    //mostra pets já adotados
     @GetMapping("/adotados")
     public String listaAdotado(Model model){
 
@@ -40,24 +42,25 @@ public class AdocaoController {
         return "adocao/lista-pet";
     }
 
-    @GetMapping("/cadastraPet")
+    //cadastra um novo pet no banco para ser adotado
+    @GetMapping("/registrar")
     public String cadastraPet(Model model) {
         model.addAttribute("pet", new Pet());
 
         return "adocao/cadastrar";
     }
 
-    @PostMapping("/cadastraPet")
+    @PostMapping("/registrar")
     public String cadastraNovoPet(Pet pet, Model model) {
 
         try {
-            adocaoService.cadastraNovoPet(pet.getNome(),pet.getRaca(),pet.getEndereco());
+            adocaoService.cadastraNovoPet(pet.getNome(),pet.getRaca(),pet.getEndereco(), pet.getIdade());
         } catch (Exception e) {
             model.addAttribute(pet);
             return "adocao/lista-pet";
         }
 
-        return "redirect:/adocao/listaPet?sucesso";
+        return "redirect:/adocao/disponiveis?sucesso";
     }
 
     @GetMapping("/adotar/{id}")
@@ -68,10 +71,10 @@ public class AdocaoController {
         Pet pet = adocaoService.buscaPetPorId(id);
         model.addAttribute(pet);
 
-        return "adocao/adote";
+        return "adocao/adote"; //arquivo html correspondente
     }
 
-    @PostMapping("/adotaPet")
+    @PostMapping("/adotar")
     public String adotaPetPorId(@RequestParam Long id, Model model) throws Exception {
 
         try {
@@ -80,6 +83,6 @@ public class AdocaoController {
             return "adocao/adote/" + id + "?erro";
         }
 
-        return "redirect:/adocao/adote?sucesso";
+        return "redirect:/adocao/disponiveis?sucesso";
     }
 }
