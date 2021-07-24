@@ -1,0 +1,19 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" xmlns:th="https://www.thymeleaf.org"
+>
+<head>
+  <title>Hospedagem</title>
+</head>
+<body>
+<h1 th:text="${#strings.capitalize(pagina) + ' Hospedagem'}"></h1>
+<span th:if="${errorMessage}"  th:text="${errorMessage}">Error</span>
+
+<form th:action="${'/hospedagem/' + pagina}" method="post" th:object="${hospedagem}">
+  <div><label> Nome : <input type="text" th:field="*{nome}"/> </label></div>
+  <div><label> chavePix: <input type="text" th:field="*{chavePix}"/> </label></div>
+  <div><label> valorDiaria: <input type="text" th:field="*{valorDiaria}"/> </label></div>
+  <input th:type="hidden" th:field="*{usuarioId}">
+  <div><input type="submit" th:value="${pagina}"/></div>
+</form>
+</body>
+</html>

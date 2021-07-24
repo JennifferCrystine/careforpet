@@ -1,0 +1,16 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" xmlns:th="https://www.thymeleaf.org"
+>
+<head>
+  <title>Adocao</title>
+</head>
+<body>
+
+<form th:action="${'/adocao/cadastraPet'}" method="post" th:object="${pet}">
+  <div><label> Nome : <input type="text" th:field="*{nome}"/> </label></div>
+  <div><label> Raça: <input type="text" th:field="*{raca}"/> </label></div>
+
+  <button th:text="Cadastrar"></button>
+</form>
+</body>
+</html>
