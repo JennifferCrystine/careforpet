@@ -16,7 +16,7 @@
         <ul class="list-group">
             <th:block th:each="p : ${pets}">
                 <a  class="list-group-item" th:href="${'/adocao/adotar/' + p.id }"><p th:text="${p.nome}"></p></a>
-                <img th:if="${p.getImagem() ne null}" th:src="${p.getImagem()}">
+
             </th:block>
         </ul>
     </div>
