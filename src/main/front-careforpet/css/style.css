@@ -23,7 +23,7 @@ h1{
 
 /*---------------Página---------------*/
 body{
-    background-color: #fbefca;
+    background-color: #fefbf4;
 }
 .box{
     margin: 2% 6%;
@@ -42,7 +42,7 @@ body {
 }
 /*---------------Menu---------------*/
 .navbar, .bg-light{
-    background-color: #d5f2fc !important;
+    background-color: #F1FBFE !important;
 }
 .navbar-light .navbar-brand{
     color: #fff;
@@ -83,7 +83,7 @@ body {
 /*---------------Footer---------------*/
 footer{
     /*background-color: #FAECBD;*/
-    background-color: #d5f2fc;
+    background-color: #F1FBFE;
     margin-top: auto;
 }
 footer p{
