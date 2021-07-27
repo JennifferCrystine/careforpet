@@ -9,22 +9,21 @@
 <body>
     <div th:replace="~{fragments/header :: header}"></div>
     <div class="container" id="adote">
-        <h1 class="mt-3 text-center" th:text="${pet.nome}"></h1>
-        <div class="row">
-            <div class="col-3 img-wrapper">
-                <img alt="imagem de gatinho"
-                     src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTohIHVxx70U8hz2Lx4TIzeB1cts-PfavaBBA&usqp=CAU">
-                <div class="mt-2 pet-infos">
-                    <p  th:text="${'Raça: ' + pet.raca}"></p>
-                    <p th:text="${'Idade: ' + pet.idade}"></p>
-                    <p th:text="${'Endereço: ' + pet.endereco}" class="row-cols-2"></p>
+        <h1 class="mt-5 text-center" th:text="${pet.nome}"></h1>
+        <div class="d-flex row-cols-2 justify-content-evenly">
+            <div class="card" style="width: 18rem;">
+                <img class="card-img-top" th:if="${pet.getImagem() ne null}" th:src="${pet.getImagem()}">
+                <div class="card-body">
+                    <p class="card-text" th:text="${'Raça: ' + pet.raca}"></p>
+                    <p class="card-text" th:text="${'Idade: ' + pet.idade}"></p>
+                    <p class="card-text" th:text="${'Endereço: ' + pet.endereco}"></p>
+                    <form th:object="${pet}" th:action="@{/adocao/adotar}" method="post">
+                        <input type="hidden" id="id" name="id" th:value="${pet.id}">
+                        <button class="mb-2 btn btn-primary" type="submit" id="reservar-button">Adote</button>
+                    </form>
                 </div>
-                <form th:object="${pet}" th:action="@{/adocao/adotar}" method="post">
-                    <input type="hidden" id="id" name="id" th:value="${pet.id}">
-                    <div><button class="mb-2 btn btn-primary" type="submit" id="reservar-button"/>Adote</div>
-                </form>
             </div>
-            <div class="col-9 d-flex align-content-center info-wrapper">
+            <div>
                 <p>
                     Brownie pudding macaroon fruitcake dessert tiramisu chupa chups sweet.
                     Sugar plum dragée croissant cookie muffin cake apple pie gummi bears.
@@ -39,8 +38,8 @@
                 </p>
             </div>
         </div>
-        <div class="medias">
-            <div class="d-flex justify-content-between images">
+        <div class="container medias mt-5">
+            <div class="d-flex justify-content-evenly images">
                 <img alt="imagem de gatinho"
                      src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTohIHVxx70U8hz2Lx4TIzeB1cts-PfavaBBA&usqp=CAU">
                 <img alt="imagem de gatinho"
@@ -50,19 +49,20 @@
                 <img alt="imagem de gatinho"
                      src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTohIHVxx70U8hz2Lx4TIzeB1cts-PfavaBBA&usqp=CAU">
             </div>
-            <div class="mt-5 d-flex justify-content-between videos">
+            <div class="mt-5 d-flex justify-content-evenly videos">
                 <video width="320" height="240" controls>
-                    <source src="https://youtu.be/XiCknbJQCyk" type="video/mp4">
+                    <source src="https://youtu.be/XiCknbJQCyk" type="video/mp4" crossorigin>
                 </video>
                 <video width="320" height="240" controls>
-                    <source src="https://youtu.be/XiCknbJQCyk" type="video/mp4">
+                    <source src="https://youtu.be/XiCknbJQCyk" type="video/mp4" crossorigin>
                 </video>
                 <video width="320" height="240" controls>
-                    <source src="https://youtu.be/XiCknbJQCyk" type="video/mp4">
+                    <source src="https://youtu.be/XiCknbJQCyk" type="video/mp4" crossorigin>
                 </video>
             </div>
         </div>
     </div>
+    <div th:replace="~{fragments/footer :: footer}"></div>
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
 </body>
 </html>

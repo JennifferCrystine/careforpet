@@ -9,9 +9,12 @@ import com.gpms.petcare.repository.PetRepository;
 import com.gpms.petcare.repository.UsuarioRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.web.multipart.MultipartFile;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.UUID;
+
 
 @Service
 public class AdocaoService {
@@ -25,19 +28,32 @@ public class AdocaoService {
     @Autowired
     private PetRepository petRepository;
 
-    public Pet cadastraNovoPet(String nome, String raca, String endereco, int idade) throws Exception {
+    @Autowired
+    private FileStorageService fileStorageService;
+
+    public Pet cadastraNovoPet(String nome, String raca, String endereco, int idade, MultipartFile imagem) throws Exception {
+
         if (nome == null){
           throw new Exception("nome nao pode ser nulo");
         }
         else {
         Pet pet = new Pet();
-        pet.setNome(nome);
-        pet.setRaca(raca);
-        pet.setEndereco(endereco);
-        Pet novoPet = petRepository.save(pet);
-        return novoPet ;
+
+            String caminhoImagem = fileStorageService.salvaImagem(imagem, "pets", String.valueOf(UUID.randomUUID()));
+
+            pet.setImagem(caminhoImagem);
+
+            pet.setNome(nome);
+            pet.setRaca(raca);
+            pet.setEndereco(endereco);
+            pet.setIdade(idade);
+            Pet novoPet = petRepository.save(pet);
+
+            return novoPet ;
+
         }
     }
+
 
     public Adocao adotaPet(Long id, String usuarioLogado) throws Exception {
         Adocao adotado = new Adocao();
@@ -79,5 +95,6 @@ public class AdocaoService {
     public Pet buscaPetPorId(Long id) {
         return petRepository.getById(id);
     }
+
 }
 

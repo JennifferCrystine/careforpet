@@ -1,19 +1,19 @@
 <!DOCTYPE html>
 <html lang="en">
   <header th:fragment="header" xmlns:th="http://www.w3.org/1999/xhtml">
-    <nav class="navbar navbar-expand-lg navbar-light fixed-top" id="mainNav">
-      <div class="container">
-        <div class="collapse navbar-collapse" id="navbarResponsive">
-          <ul class="navbar-nav navbar-nav-home ml-auto">
-            <li class="nav-item">
-              <a class="nav-link" th:href="@{/}">Home</a>
-            </li>
-            <li class="nav-item">
-              <a class="nav-link"  th:href="@{/hospedagem/listar}">Reservar</a>
-            </li>
-            <li class="nav-item">
-              <a class="nav-link" th:href="@{/adocao/disponiveis}">Adote</a>
-            </li>
+    <nav class="navbar navbar-expand-lg navbar-light" id="nav">
+      <div class="container px-5">
+        <a class="navbar-brand text-black-50" th:href="@{/}">Cuidado com Pets</a>
+        <button class="navbar-toggler" type="button" data-bs-toggle="collapse"
+                data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent"
+                aria-expanded="false" aria-label="Toggle navigation"><span
+                class="navbar-toggler-icon"></span></button>
+        <div class="collapse navbar-collapse" id="navbarSupportedContent">
+          <ul class="navbar-nav ms-auto mb-2 mb-lg-0">
+            <li class="nav-item"><a class="nav-link" th:href="@{/}">Home</a></li>
+            <li class="nav-item"><a class="nav-link" th:href="@{/adocao/disponiveis}">Adoção</a></li>
+            <li class="nav-item"><a class="nav-link" th:href="@{/hospedagem/listar}">Hospedagem</a></li>
+            <li class="nav-item"><a class="nav-link" href="/ongs">ONGs</a></li>
           </ul>
         </div>
       </div>
