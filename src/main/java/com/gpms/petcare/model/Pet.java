@@ -30,4 +30,6 @@ public class Pet {
 
     @Column
     private boolean adotado = false;
+
+    private String imagem;
 }

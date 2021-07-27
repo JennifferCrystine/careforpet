@@ -8,7 +8,7 @@
 <body>
   <div th:replace="~{fragments/header :: header}"></div>
   <div class="container">
-    <form class="mt-5" th:action="${'/adocao/registrar'}" method="post" th:object="${pet}">
+    <form class="mt-5" th:action="${'/adocao/registrar'}" method="post" th:object="${pet}" enctype="multipart/form-data">
       <div class="mb-3">
         <label class="form-label">Nome</label>
         <input class="form-control" type="text" th:field="*{nome}" placeholder="Nome"/>
@@ -24,6 +24,11 @@
       <div class="mb-3">
         <label class="form-label">Endereço</label>
         <input class="form-control" type="text" th:field="*{endereco}" placeholder="Endereço"/>
+      </div>
+
+      <div class="mb-3">
+        <label class="form-label">Foto</label>
+        <input class="form-control" type="file" name="arquivo-imagem" placeholder="Imagem"/>
       </div>
 
       <button class="btn btn-primary" th:text="Cadastrar"></button>

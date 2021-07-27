@@ -7,7 +7,9 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
+import org.springframework.web.multipart.MultipartFile;
 
+import javax.servlet.http.HttpServletRequest;
 import java.util.List;
 import java.util.Objects;
 
@@ -51,16 +53,15 @@ public class AdocaoController {
     }
 
     @PostMapping("/registrar")
-    public String cadastraNovoPet(Pet pet, Model model) {
+    public String cadastraNovoPet(Pet pet, Model model, HttpServletRequest req, @RequestParam(name = "arquivo-imagem") MultipartFile arquivoImagem) {
 
         try {
-            adocaoService.cadastraNovoPet(pet.getNome(),pet.getRaca(),pet.getEndereco(), pet.getIdade());
+            adocaoService.cadastraNovoPet(pet.getNome(),pet.getRaca(),pet.getEndereco(), pet.getIdade(), arquivoImagem);
+            return "redirect:/adocao/disponiveis?sucesso";
         } catch (Exception e) {
             model.addAttribute(pet);
             return "adocao/lista-pet";
         }
-
-        return "redirect:/adocao/disponiveis?sucesso";
     }
 
     @GetMapping("/adotar/{id}")
