@@ -19,9 +19,7 @@
     <script type="text/javascript" src="https://cdn.jsdelivr.net/npm/daterangepicker/daterangepicker.min.js"></script>
     <link rel="stylesheet" type="text/css" href="https://cdn.jsdelivr.net/npm/daterangepicker/daterangepicker.css" />
 
-    <script type="text/javascript" src="jquery-3.6.js"></script>
-
-    <script type="text/javascript" src="js.js"></script>
+    <script type="text/javascript" src="js/scripts.js"></script>
 
     <title>Hospedagem - Cuidado com pets</title>
 
@@ -48,10 +46,10 @@
       
   </head>
   <body>
-        <div class="box">
+        <div class="box px-5">
             <div id="opcao">
                 <div class="filtros row">
-                    <div class="filtro col-3">
+                    <div class="dropdown filtro col-2">
                         <label>Tipo</label>
                         <select class="form-select" id="inputGroupSelect01">
                           <option selected>Selecione...</option>
@@ -61,12 +59,10 @@
                         </select>
                     </div>
 
-                    <div class="filtro data col-3">
+                    <div class="filtro data col-2">
                         <label>Data</label>
                         <input class="form-control" type="text" name="daterange" value="01/07/2021 - 10/07/2021"> </input>
                     </div>
-
-                    <div class= "filtro col-1"></div>
 
                     <div class="filtro preco col-2">
                         <label>Preço mínimo</label>
@@ -76,6 +72,9 @@
                         <label>Preço máximo</label>
                         <input class="form-control" type="number" min="1" max="10000" step="1" id="input-number">
                     </div>
+                    <div class="botao col-2">
+                      <a href="#" class="btn btn-padrao">Filtrar</a>
+                  </div>
                 </div>
                 <div class="card-body" >
                     <h6 class="card-subtitle mb-2 text-muted">Casa Pet - Hospedagem Canina  </h6>
