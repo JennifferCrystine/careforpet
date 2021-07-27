@@ -7,10 +7,10 @@ import org.springframework.web.bind.annotation.GetMapping;
 @Controller
 public class ExemploController {
 
-    @GetMapping("/exemplo")
+    @GetMapping("/ongs")
     public String alomundo(Model model) {
         model.addAttribute("nome", "Jenniffer");
-        return "exemplo";
+        return "ongs";
     }
 
     @GetMapping("/")
