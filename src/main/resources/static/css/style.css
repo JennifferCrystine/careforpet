@@ -10246,3 +10246,14 @@ body {
 .form-select, .form-control{
     border: 1px solid #FAECBD;
 }
+/*---------------Reserva Hospedagem---------------*/
+.card-hospedagem{
+    margin: 1%;
+}
+.card-hospedagem #dataInicio, .card-hospedagem #dataFinal{
+    max-width: 9%;
+    font-size: 0.8rem;
+}
+.card-hospedagem p{
+    margin-bottom: 0.2rem;
+}
