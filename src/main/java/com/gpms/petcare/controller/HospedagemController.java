@@ -18,6 +18,7 @@ import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.List;
+import java.util.Locale;
 import java.util.Objects;
 import java.util.concurrent.TimeUnit;
 import java.util.stream.Collectors;
@@ -43,7 +44,8 @@ public class HospedagemController {
                                     @RequestParam(required = false) Double valorMaximo,
                                     @RequestParam(required = false) String tipo) {
         List<Hospedagem> hospedagens = hospedagemService.getAll();
-        if (!Objects.isNull(filtrar))
+        if (!Objects.isNull(filtrar)) {
+            String finalTipo = tipo.toUpperCase();
             hospedagens = hospedagens.stream().filter(h->{
                 SimpleDateFormat sdf = new SimpleDateFormat("dd/MM/yyyy");
                 try {
@@ -56,8 +58,8 @@ public class HospedagemController {
 
                     if (!Objects.isNull(valorMinimo) && !Objects.isNull(valorMaximo))
                         result = valor >= valorMinimo && valor <= valorMaximo;
-                    if (!"NULL".equals(tipo))
-                        result = result && !Objects.isNull(h.getTipoHospedagem()) &&  h.getTipoHospedagem().equals(tipo);
+                    if (!"NULL".equals(finalTipo))
+                        result = result && !Objects.isNull(h.getTipoHospedagem()) &&  h.getTipoHospedagem().equals(finalTipo);
 
                     return result;
                 } catch (ParseException e) {
@@ -65,6 +67,7 @@ public class HospedagemController {
                     return false;
                 }
             }).collect(Collectors.toList());
+        }
 
         model.addAttribute("colocarMensagemSucesso", !Objects.isNull(sucesso));
         model.addAttribute("hospedagens", hospedagens);

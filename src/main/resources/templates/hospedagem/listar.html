@@ -70,7 +70,7 @@
                     <h6 th:text="${h.nome} " class="card-subtitle mb-2 text-muted">${h.nome}</h6>
                     <p th:text="${'Tipo: '  + h.tipoHospedagem}" class="card-text">th:text="${h.tipoHospedagem}"</p>
                     <p th:text="${'Valor diário: R$'  + h.valorDiaria}" class="card-text">th:text="${h.valorDiaria}"</p>
-                    <p th:text="${'Telefone: '  + h.endereco}" class="card-text">th:text="${h.telefone}</p>
+                    <p th:text="${'Telefone: '  + h.telefone}" class="card-text">th:text="${h.telefone}</p>
                     <p th:text="${'Endereço: '  + h.endereco}" class="card-text">th:text="${h.endereco}</p>
                     <a th:href="${'/hospedagem/reservar/' + h.id}" class="btn btn-padrao">Reservar</a>
                 </div>
