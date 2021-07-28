@@ -52,7 +52,10 @@ public class HospedagemController {
                     long diffInMillies = Math.abs(finale.getTime() - inicio.getTime());
                     long dias = TimeUnit.DAYS.convert(diffInMillies, TimeUnit.MILLISECONDS);
                     Double valor = dias*h.getValorDiaria();
-                    Boolean result = valor >= valorMinimo && valor <= valorMaximo;
+                    Boolean result = true;
+
+                    if (!Objects.isNull(valorMinimo) && !Objects.isNull(valorMaximo))
+                        result = valor >= valorMinimo && valor <= valorMaximo;
                     if (!"NULL".equals(tipo))
                         result = result && !Objects.isNull(h.getTipoHospedagem()) &&  h.getTipoHospedagem().equals(tipo);
 
