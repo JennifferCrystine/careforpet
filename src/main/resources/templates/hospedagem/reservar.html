@@ -36,8 +36,8 @@
         <div><label  class="card-text card-hospedagem" th:text="*{'Preço: R$' + valorDiaria}"></label></div>
         <div class="card-text card-hospedagem" >
           <p>Data: </p>
-          <input th:type="text" id="dataInicio">
-          <input th:type="text" id="dataFinal">
+          <input th:type="text" id="dataInicio" placeholder="dd/MM/yyyy">
+          <input th:type="text" id="dataFinal" placeholder="dd/MM/yyyy">
         </div>
         <input type="hidden" id="id" th:value="${hospedagem.id}">
         <div><button class="btn btn-padrao" type="button" id="reservar-button"/>Reservar</div>
