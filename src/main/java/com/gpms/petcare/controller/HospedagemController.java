@@ -1,6 +1,7 @@
 package com.gpms.petcare.controller;
 
 import com.gpms.petcare.dto.ReservaResponseDTO;
+import com.gpms.petcare.enums.TipoHospedagem;
 import com.gpms.petcare.model.Hospedagem;
 import com.gpms.petcare.service.HospedagemService;
 import com.gpms.petcare.session.UsuarioLogadoSession;
@@ -17,8 +18,10 @@ import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.List;
+import java.util.Locale;
 import java.util.Objects;
 import java.util.concurrent.TimeUnit;
+import java.util.stream.Collectors;
 
 @Controller
 @RequestMapping("/hospedagem")
@@ -34,8 +37,45 @@ public class HospedagemController {
     private HospedagemService hospedagemService;
 
     @GetMapping("/listar")
-    public String listarHospedagens(Model model, @RequestParam(required = false) String sucesso) {
+    public String listarHospedagens(Model model, @RequestParam(required = false) String sucesso, @RequestParam(required = false) String filtrar,
+                                    @RequestParam(required = false) String dataInicio,
+                                    @RequestParam(required = false) String dataFinal,
+                                    @RequestParam(required = false) Double valorMinimo,
+                                    @RequestParam(required = false) Double valorMaximo,
+                                    @RequestParam(required = false) String tipo) {
         List<Hospedagem> hospedagens = hospedagemService.getAll();
+        if (!Objects.isNull(filtrar)) {
+            String finalTipo = tipo.toUpperCase();
+            hospedagens = hospedagens.stream().filter(h->{
+                SimpleDateFormat sdf = new SimpleDateFormat("dd/MM/yyyy");
+                try {
+                    Date inicio = sdf.parse(dataInicio);
+                    Date finale = sdf.parse(dataFinal);
+                    long diffInMillies = Math.abs(finale.getTime() - inicio.getTime());
+                    long dias = TimeUnit.DAYS.convert(diffInMillies, TimeUnit.MILLISECONDS);
+                    Double valor = dias*h.getValorDiaria();
+                    Boolean result = true;
+
+                    if (!Objects.isNull(valorMinimo) && !Objects.isNull(valorMaximo))
+                        result = valor >= valorMinimo && valor <= valorMaximo;
+
+                    if (!Objects.isNull(dataFinal) && !Objects.isNull(dataInicio)) {
+                        h.setValorTotal(valor);
+                    } else {
+                        h.setValorTotal(h.getValorDiaria());
+                    }
+
+                    if (!"NULL".equals(finalTipo))
+                        result = result && !Objects.isNull(h.getTipoHospedagem()) &&  h.getTipoHospedagem().equals(finalTipo);
+
+                    return result;
+                } catch (ParseException e) {
+                    e.printStackTrace();
+                    return false;
+                }
+            }).collect(Collectors.toList());
+        }
+
         model.addAttribute("colocarMensagemSucesso", !Objects.isNull(sucesso));
         model.addAttribute("hospedagens", hospedagens);
 
@@ -51,6 +91,7 @@ public class HospedagemController {
         hospedagem.setUsuarioId(usuarioId);
         model.addAttribute("hospedagem", hospedagem);
         model.addAttribute("pagina", "cadastrar");
+        model.addAttribute("tipos", TipoHospedagem.values());
 
 
         return "hospedagem/cadastrar-editar";

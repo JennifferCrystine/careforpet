@@ -16,13 +16,23 @@ public class Hospedagem {
 
     private String nome;
 
+    @Column(name="usuario_id")
+    private Long usuarioId;
+
     @Column(name="chave_pix")
     private String chavePix;
+
+    @Column(name="tipo_hospedagem")
+    private String tipoHospedagem;
 
     @Column(name="valor_diaria")
     private Double valorDiaria;
 
-    @Column(name="usuario_id")
-    private Long usuarioId;
+    private String telefone;
+
+    private String endereco;
+
+    @Transient
+    private Double valorTotal;
 
 }
