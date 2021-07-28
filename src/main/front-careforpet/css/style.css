@@ -80,7 +80,7 @@ body {
 /*---------------Filtro---------------*/
 .filtros{
     margin: -10px;
-    max-height: 130px;
+    max-height: 120px;
 }
 .preco, .data, .dropdown{
     display: grid;

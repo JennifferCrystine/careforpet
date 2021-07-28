@@ -8,10 +8,12 @@
 <h1> Reservar Hospedagem </h1>
 
 <form th:object="${hospedagem}">
-  <div><label th:text="*{'Nome:' + nome}"></label></div>
-  <div><label th:text="*{'Nome:' + valorDiaria}"></label></div>
+  <div><label th:text="*{'Nome: ' + nome}"></label></div>
+  <div><label th:text="*{'Preço: R$' + valorDiaria}"></label></div>
+  <div><label th:text="*{'Tipo: ' + tipoHospedagem}"></label></div>
   <input th:type="text" id="dataInicio">
   <input th:type="text" id="dataFinal">
+  <div><label th:text="*{'Chave Pix: ' + chavePix}"></label></div>
   <input type="hidden" id="id" th:value="${hospedagem.id}">
   <div><button type="button" id="reservar-button"/>Reservar</div>
   <div id="pagar-div">

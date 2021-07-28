@@ -9,10 +9,17 @@
 <span th:if="${errorMessage}"  th:text="${errorMessage}">Error</span>
 
 <form th:action="${'/hospedagem/' + pagina}" method="post" th:object="${hospedagem}">
-  <div><label> Nome : <input type="text" th:field="*{nome}"/> </label></div>
-  <div><label> chavePix: <input type="text" th:field="*{chavePix}"/> </label></div>
-  <div><label> valorDiaria: <input type="text" th:field="*{valorDiaria}"/> </label></div>
+    <div><label> Nome : <input type="text" th:field="*{nome}"/> </label></div>
+    <div><label> tipoHospedagem: </label><select th:field="*{tipoHospedagem}">
+        <option th:each="i : ${tipos}" th:value="${i.nome}" th:text="${i.nome}">
+        </option>
+    </select> </div>
+
+    <div><label> telefone: <input type="text" th:field="*{telefone}"/> </label></div>
+    <div><label> endereço: <input type="text" th:field="*{endereco}"/> </label></div>
+    <div><label> valorDiaria: <input type="text" th:field="*{valorDiaria}"/> </label></div>
   <input th:type="hidden" th:field="*{usuarioId}">
+  <div><label> chavePix: <input type="text" th:field="*{chavePix}"/> </label></div>
   <div><input type="submit" th:value="${pagina}"/></div>
 </form>
 </body>
