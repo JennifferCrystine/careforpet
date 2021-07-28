@@ -20,6 +20,7 @@ import java.util.Date;
 import java.util.List;
 import java.util.Objects;
 import java.util.concurrent.TimeUnit;
+import java.util.stream.Collectors;
 
 @Controller
 @RequestMapping("/hospedagem")
@@ -35,8 +36,28 @@ public class HospedagemController {
     private HospedagemService hospedagemService;
 
     @GetMapping("/listar")
-    public String listarHospedagens(Model model, @RequestParam(required = false) String sucesso) {
+    public String listarHospedagens(Model model, @RequestParam(required = false) String sucesso, @RequestParam(required = false) String filtrar,
+                                    @RequestParam(required = false) String dataInicio,
+                                    @RequestParam(required = false) String dataFinal,
+                                    @RequestParam(required = false) Double valorMinimo,
+                                    @RequestParam(required = false) Double valorMaximo) {
         List<Hospedagem> hospedagens = hospedagemService.getAll();
+        if (!Objects.isNull(filtrar))
+            hospedagens = hospedagens.stream().filter(h->{
+                SimpleDateFormat sdf = new SimpleDateFormat("dd/MM/yyyy");
+                try {
+                    Date inicio = sdf.parse(dataInicio);
+                    Date finale = sdf.parse(dataFinal);
+                    long diffInMillies = Math.abs(finale.getTime() - inicio.getTime());
+                    long dias = TimeUnit.DAYS.convert(diffInMillies, TimeUnit.MILLISECONDS);
+                    Double valor = dias*h.getValorDiaria();
+                    return valor >= valorMinimo && valor <= valorMaximo;
+                } catch (ParseException e) {
+                    e.printStackTrace();
+                    return false;
+                }
+            }).collect(Collectors.toList());
+
         model.addAttribute("colocarMensagemSucesso", !Objects.isNull(sucesso));
         model.addAttribute("hospedagens", hospedagens);
 

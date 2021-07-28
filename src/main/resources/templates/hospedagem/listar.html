@@ -14,10 +14,30 @@
     <span><b>Operação realizada com sucesso!</b></span>
 </th:block>
 
+<div class="mb-3">
+    <label class="form-label">data de Início</label>
+    <input class="form-control" type="text" id="dataInicio" placeholder="data de Início"/>
+</div>
+<div class="mb-3">
+    <label class="form-label">data de Fim</label>
+    <input class="form-control" type="text" id="dataFim" placeholder="data de Fim"/>
+</div>
+<div class="mb-3">
+    <label class="form-label">Valor mínimo</label>
+    <input class="form-control" type="number" id="valorMinimo" placeholder="Valor mínimo"/>
+</div>
+<div class="mb-3">
+    <label class="form-label">Valor mínimo</label>
+    <input class="form-control" type="number" id="valorMaximo" placeholder="Valor mínimo"/>
+</div>
+<button id="filtrar-button">filtrar</button>
+
   <ul>
       <th:block th:each="h : ${hospedagens}">
         <a th:href="${'/hospedagem/reservar/' + h.id}"><li th:text="${h.nome}"></li></a>
       </th:block>
   </ul>
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+<script src="/js/hospedagem/listar.js" ></script>
 </body>
 </html>
