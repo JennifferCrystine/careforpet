@@ -58,6 +58,13 @@ public class HospedagemController {
 
                     if (!Objects.isNull(valorMinimo) && !Objects.isNull(valorMaximo))
                         result = valor >= valorMinimo && valor <= valorMaximo;
+
+                    if (!Objects.isNull(dataFinal) && !Objects.isNull(dataInicio)) {
+                        h.setValorTotal(valor);
+                    } else {
+                        h.setValorTotal(h.getValorDiaria());
+                    }
+
                     if (!"NULL".equals(finalTipo))
                         result = result && !Objects.isNull(h.getTipoHospedagem()) &&  h.getTipoHospedagem().equals(finalTipo);
 

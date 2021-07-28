@@ -32,4 +32,7 @@ public class Hospedagem {
 
     private String endereco;
 
+    @Transient
+    private Double valorTotal;
+
 }
