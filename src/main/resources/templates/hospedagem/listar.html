@@ -34,52 +34,34 @@
     <span><b>Operação realizada com sucesso!</b></span>
 </th:block>
 
-<div class="mb-3">
-    <label class="form-label">data de Início</label>
-    <input class="form-control" type="text" id="dataInicio" placeholder="data de Início"/>
-</div>
-<div class="mb-3">
-    <label class="form-label">data de Fim</label>
-    <input class="form-control" type="text" id="dataFim" placeholder="data de Fim"/>
-</div>
-<div class="mb-3">
-    <label class="form-label">Valor mínimo</label>
-    <input class="form-control" type="number" id="valorMinimo" placeholder="Valor mínimo"/>
-</div>
-<div class="mb-3">
-    <label class="form-label">Valor mínimo</label>
-    <input class="form-control" type="number" id="valorMaximo" placeholder="Valor mínimo"/>
-</div>
-<button id="filtrar-button">filtrar</button>
-
 <div class="box px-5">
     <div id="opcao">
         <div class="filtros row">
             <div class="dropdown filtro col-2">
                 <label>Tipo</label>
-                <select class="form-select" id="inputGroupSelect01">
-                    <option selected>Selecione...</option>
-                    <option value="1">Parceiro</option>
-                    <option value="2">Hotel</option>
-                    <option value="3">Spa</option>
+                <select class="form-select" id="tipo">
+                    <option value="NULL">Selecione...</option>
+                    <option value="PARCEIRO">Parceiro</option>
+                    <option value="HOTEL">Hotel</option>
+                    <option value="SPA">Spa</option>
                 </select>
             </div>
 
             <div class="filtro data col-2">
                 <label>Data</label>
-                <input class="form-control" type="text" name="daterange" value="01/07/2021 - 10/07/2021">
+                <input class="form-control" type="text" id="range" name="daterange" value="01/07/2021 - 10/07/2021">
             </div>
 
             <div class="filtro preco col-2">
                 <label>Preço mínimo</label>
-                <input  class="form-control" type="number" min="0" max="10000" step="10" >
+                <input  class="form-control" type="number" min="0" max="10000" step="10" id="valorMinimo">
             </div>
             <div class="filtro preco col-2">
                 <label>Preço máximo</label>
-                <input class="form-control" type="number" min="0" max="10000" step="10" >
+                <input class="form-control" type="number" min="0" max="10000" step="10" id="valorMaximo">
             </div>
             <div class="botao col-2">
-                <a href="#" class="btn btn-padrao">Filtrar</a>
+                <a href="#" class="btn btn-padrao" id="filtrar-button">Filtrar</a>
             </div>
         </div>
         <ul>

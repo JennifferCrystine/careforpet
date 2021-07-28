@@ -40,7 +40,8 @@ public class HospedagemController {
                                     @RequestParam(required = false) String dataInicio,
                                     @RequestParam(required = false) String dataFinal,
                                     @RequestParam(required = false) Double valorMinimo,
-                                    @RequestParam(required = false) Double valorMaximo) {
+                                    @RequestParam(required = false) Double valorMaximo,
+                                    @RequestParam(required = false) String tipo) {
         List<Hospedagem> hospedagens = hospedagemService.getAll();
         if (!Objects.isNull(filtrar))
             hospedagens = hospedagens.stream().filter(h->{
@@ -51,7 +52,11 @@ public class HospedagemController {
                     long diffInMillies = Math.abs(finale.getTime() - inicio.getTime());
                     long dias = TimeUnit.DAYS.convert(diffInMillies, TimeUnit.MILLISECONDS);
                     Double valor = dias*h.getValorDiaria();
-                    return valor >= valorMinimo && valor <= valorMaximo;
+                    Boolean result = valor >= valorMinimo && valor <= valorMaximo;
+                    if (!"NULL".equals(tipo))
+                        result = result && !Objects.isNull(h.getTipoHospedagem()) &&  h.getTipoHospedagem().equals(tipo);
+
+                    return result;
                 } catch (ParseException e) {
                     e.printStackTrace();
                     return false;
