@@ -22,6 +22,9 @@ public class Hospedagem {
     @Column(name="valor_diaria")
     private Double valorDiaria;
 
+    @Column(name="tipo_hospedagem")
+    private String tipoHospedagem;
+
     @Column(name="usuario_id")
     private Long usuarioId;
 

@@ -1,6 +1,7 @@
 package com.gpms.petcare.controller;
 
 import com.gpms.petcare.dto.ReservaResponseDTO;
+import com.gpms.petcare.enums.TipoHospedagem;
 import com.gpms.petcare.model.Hospedagem;
 import com.gpms.petcare.service.HospedagemService;
 import com.gpms.petcare.session.UsuarioLogadoSession;
@@ -51,6 +52,7 @@ public class HospedagemController {
         hospedagem.setUsuarioId(usuarioId);
         model.addAttribute("hospedagem", hospedagem);
         model.addAttribute("pagina", "cadastrar");
+        model.addAttribute("tipos", TipoHospedagem.values());
 
 
         return "hospedagem/cadastrar-editar";
