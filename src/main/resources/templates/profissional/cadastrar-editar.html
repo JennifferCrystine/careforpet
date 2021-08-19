@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" xmlns:th="https://www.thymeleaf.org"
+>
+<head>
+  <title>Profissional</title>
+</head>
+<body>
+<h1 th:text="${#strings.capitalize(pagina) + ' Profissional'}"></h1>
+<span th:if="${errorMessage}"  th:text="${errorMessage}">Error</span>
+
+<form th:action="${'/profissional/' + pagina}" method="post" th:object="${profissional}">
+    <div><label> Nome : <input type="text" th:field="*{nome}"/> </label></div>
+    <div><label> Estado: </label><select th:field="*{estado}">
+        <option th:if="${estadoSelecionado == e}"  th:each="e : ${estados}" th:value="${e}" th:text="${e}" selected="selected">
+        </option>
+        <option th:if="${estadoSelecionado != e}"  th:each="e : ${estados}" th:value="${e}" th:text="${e}" >
+        </option>
+    </select> </div>
+    <div><label> Cidade: </label><select th:field="*{cidade}">
+        <option th:each="c : ${cidades}" th:value="${c}" th:text="${c}">
+        </option>
+    </select> </div>
+    <div><label> telefone: <input type="text" th:field="*{telefone}"/> </label></div>
+    <div><label> email: <input type="text" th:field="*{email}"/> </label></div>
+  <div><label> chavePix: <input type="text" th:field="*{chavePix}"/> </label></div>
+  <div><input type="submit" th:value="${pagina}"/></div>
+</form>
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+<script src="/js/profissional/cadastrar.js"></script>
+</body>
+</html>
