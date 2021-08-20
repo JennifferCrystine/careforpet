@@ -23,9 +23,10 @@
     <div><label> telefone: <input type="text" th:field="*{telefone}"/> </label></div>
     <div><label> email: <input type="text" th:field="*{email}"/> </label></div>
   <div><label> chavePix: <input type="text" th:field="*{chavePix}"/> </label></div>
+    <input th:if="${pagina == 'alterar'}" type="hidden" name="id" th:value="${id}">
   <div><input type="submit" th:value="${pagina}"/></div>
 </form>
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
-<script src="/js/profissional/cadastrar.js"></script>
+<script src="/js/profissional/cadastrar-editar.js"></script>
 </body>
 </html>
