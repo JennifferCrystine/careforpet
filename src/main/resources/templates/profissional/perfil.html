@@ -9,6 +9,7 @@
 <span th:if="${errorMessage}"  th:text="${errorMessage}">Error</span>
 
 <div th:object="${profissional}">
+    <a th:href="'/profissional/avalia/' + *{id}">Clique aqui para Avaliar</a>
     <div><label th:text="'Nome: ' + *{nome}"> </label></div>
     <div><label th:text="'Estado: ' + *{estado}"> </label></div>
     <div><label th:text="'Cidade: ' + *{cidade}"> </label></div>

@@ -2,10 +2,16 @@ package com.gpms.petcare.controller;
 
 import com.fasterxml.jackson.core.JsonProcessingException;
 import com.gpms.petcare.client.LocalidadesAPIClient;
+import com.gpms.petcare.dto.AvaliaProfissionalDTO;
 import com.gpms.petcare.dto.localidadesAPIClient.EstadoDTO;
 import com.gpms.petcare.enums.TipoHospedagem;
+import com.gpms.petcare.model.Avaliacao;
 import com.gpms.petcare.model.Profissional;
+import com.gpms.petcare.model.Usuario;
+import com.gpms.petcare.service.AvaliacaoService;
 import com.gpms.petcare.service.ProfissionalService;
+import com.gpms.petcare.service.UsuarioService;
+import com.gpms.petcare.session.UsuarioLogadoSession;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -22,7 +28,16 @@ public class ProfissionalController {
     private ProfissionalService profissionalService;
 
     @Autowired
+    private UsuarioService usuarioService;
+
+    @Autowired
+    private AvaliacaoService avaliacaoService;
+
+    @Autowired
     private LocalidadesAPIClient localidadesAPIClient;
+
+    @Autowired
+    private UsuarioLogadoSession usuarioLogadoSession;
 
     @GetMapping("/cadastrar")
     public String cadastrar(Model model,
@@ -157,5 +172,34 @@ public class ProfissionalController {
         return "profissional/perfil";
     }
 
+    @GetMapping("/avalia/{id}")
+    public String avalia(Model model, @PathVariable(name = "id") Long profissionalId) {
+        AvaliaProfissionalDTO dto = new AvaliaProfissionalDTO();
+        dto.setProfissionalId(profissionalId);
+        dto.setUsuarioId(usuarioLogadoSession.getId());
+        model.addAttribute(dto);
+
+        return "profissional/avalia";
+    }
+
+    @PostMapping("/avalia")
+    public String avalia(AvaliaProfissionalDTO dto, Model model) {
+
+        try {
+            Profissional profissional = profissionalService.buscaProfissional(dto.getProfissionalId());
+            Usuario usuario = usuarioService.getUsuarioPorId(dto.getUsuarioId()).orElse(null);
+
+            if (Objects.isNull(profissional) || Objects.isNull(usuario))
+                throw new Exception("Usuario ou Profissional nulo");
+
+            avaliacaoService.avalia(usuario, profissional, dto.getNota());
+
+            return "redirect:/profissional/" + profissional.getId();
+        } catch (Exception e) {
+            model.addAttribute("errorMessage", "Erro ao avaliar");
+            model.addAttribute(dto);
+            return "profissional/avalia";
+        }
+    }
 
 }

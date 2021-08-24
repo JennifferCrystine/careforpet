@@ -18,6 +18,10 @@ public class UsuarioService {
         return usuarioRepository.findByEmail(email);
     }
 
+    public Optional<Usuario> getUsuarioPorId(Long id) {
+        return usuarioRepository.findById(id);
+    }
+
     public Usuario cadastrarUsuario(UsuarioDTO dto) {
         Usuario usuario = new Usuario();
         usuario.setEmail(dto.getEmail());

@@ -1,0 +1,15 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" xmlns:th="https://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+    <span th:if="${errorMessage}"  th:text="${errorMessage}">Error</span>
+  <form action="/profissional/avalia" method="post" th:object="${avaliaProfissionalDTO}">
+      <input type="hidden" th:field="*{usuarioId}">
+      <input >
+
+  </form>
+</body>
+</html>
