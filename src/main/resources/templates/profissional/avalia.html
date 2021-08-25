@@ -6,9 +6,12 @@
 </head>
 <body>
     <span th:if="${errorMessage}"  th:text="${errorMessage}">Error</span>
-  <form action="/profissional/avalia" method="post" th:object="${avaliaProfissionalDTO}">
+  <form th:action="@{/profissional/avalia}" method="post" th:object="${avaliaProfissionalDTO}">
       <input type="hidden" th:field="*{usuarioId}">
-      <input >
+      <input type="hidden" th:field="*{profissionalId}">
+      Nota (de 1.0 a 100.0): <input th:field="*{nota}" type="number">
+
+      <button type="submit"> Avaliar </button>
 
   </form>
 </body>

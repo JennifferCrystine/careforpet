@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" xmlns:th="https://www.thymeleaf.org"
+>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
+
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+
+    <!-- Bootstrap CSS -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
+
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Lato:ital,wght@0,400;1,700&display=swap" rel="stylesheet">
+
+    <link rel="stylesheet" type="text/css" href="/css/style.css" />
+
+    <script type="text/javascript" src="https://cdn.jsdelivr.net/jquery/latest/jquery.min.js"></script>
+    <script type="text/javascript" src="https://cdn.jsdelivr.net/momentjs/latest/moment.min.js"></script>
+    <script type="text/javascript" src="https://cdn.jsdelivr.net/npm/daterangepicker/daterangepicker.min.js"></script>
+    <link rel="stylesheet" type="text/css" href="https://cdn.jsdelivr.net/npm/daterangepicker/daterangepicker.css" />
+
+    <script type="text/javascript" src="/js/hospedagem/reservar.js"></script>
+
+    <title>Profissionais</title>
+</head>
+<body id="hospedagem">
+
+<div th:replace="~{fragments/header :: header}"></div>
+
+<th:block th:if="${colocarMensagemSucesso}">
+    <div class="alert alert-success" role="alert"><b>Operação realizada com sucesso!</b></div>
+</th:block>
+
+<div class="box px-5">
+        <ul>
+            <th:block th:each="p : ${profissionais}">
+                <div class="card-body" >
+                    <h6 th:text="${p.nome} " class="card-subtitle mb-2 text-muted"></h6>
+                    <p th:text="${'Email: '  + p.email}" class="card-text"></p>
+                    <p th:text="${'Telefone: '  + p.telefone}" class="card-text"></p>
+                    <p th:text="${'Estado: '  + p.estado}" class="card-text"></p>
+                    <p th:text="${'Cidade: '  + p.cidade}" class="card-text"></p>
+                    <a th:href="${'/profissional/' + p.id}" class="btn btn-padrao">Ver</a>
+                </div>
+            </th:block>
+        </ul>
+
+    </div>
+
+</div>
+<!-- Footer-->
+<div th:replace="~{fragments/footer :: footer}"></div>
+<script src="/js/hospedagem/listar.js" ></script>
+</body>
+
+</html>

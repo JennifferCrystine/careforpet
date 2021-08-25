@@ -8,6 +8,8 @@ import com.gpms.petcare.repository.AvaliacaoRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.util.Optional;
+
 @Service
 public class AvaliacaoService {
 
@@ -29,5 +31,11 @@ public class AvaliacaoService {
         avaliacao.setAvaliador(usuario);
 
         return avaliacaoRepository.save(avaliacao);
+    }
+
+    public Boolean usuarioAvaliouProfissional(Usuario usuario, Profissional profissional) {
+        Optional<Avaliacao> avaliacaoOp = avaliacaoRepository.findAvaliacaoByAvaliadoAndAndAvaliador(profissional, usuario);
+        return avaliacaoOp.isPresent();
+
     }
 }

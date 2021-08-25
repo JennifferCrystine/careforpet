@@ -150,6 +150,12 @@ public class ProfissionalController {
         return "profissional/cadastrar-editar";
     }
 
+    @GetMapping("/listar")
+    public String listaProfissionais(Model model) {
+        model.addAttribute("profissionais", profissionalService.listaProfissionais());
+        return "profissional/listar";
+    }
+
     @PostMapping("/cadastrar")
     public String cadastrar(Profissional profissional) {
         Profissional novoProfissional = profissionalService.cadastraProfissional(profissional);
@@ -166,7 +172,11 @@ public class ProfissionalController {
 
     @GetMapping("/{id}")
     public String perfil(Model model, @PathVariable Long id) {
+        Usuario usuario = usuarioService.getUsuarioPorId(usuarioLogadoSession.getId()).get();
         Profissional profissional = profissionalService.buscaProfissional(id);
+        Boolean usuarioPodeAvaliar = !avaliacaoService.usuarioAvaliouProfissional(usuario, profissional);
+
+        model.addAttribute("podeAvaliar", usuarioPodeAvaliar);
         model.addAttribute(profissional);
 
         return "profissional/perfil";

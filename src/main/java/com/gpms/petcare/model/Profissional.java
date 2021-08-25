@@ -26,7 +26,7 @@ public class Profissional {
     @Column
     private String chavePix;
 
-    @Column
+    @Transient
     private Double nota;
 
     @Column
