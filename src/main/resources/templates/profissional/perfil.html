@@ -10,13 +10,15 @@
 
 <div th:object="${profissional}">
     <a th:if="${podeAvaliar}" th:href="'/profissional/avalia/' + *{id}">Clique aqui para Avaliar</a>
+    <a th:href="'/profissional/agendar/' + *{id}">Clique aqui para agendar passeio</a>
     <div><label th:text="'Nome: ' + *{nome}"> </label></div>
     <div><label th:text="'Nota: ' + *{nota}"> </label></div>
     <div><label th:text="'Estado: ' + *{estado}"> </label></div>
     <div><label th:text="'Cidade: ' + *{cidade}"> </label></div>
     <div><label th:text="'Telefone: ' + *{telefone}"> </label></div>
     <div><label th:text="'Email: ' + *{email}"> </label></div>
-    <div><label th:text="'Email: ' + *{chavePix}"> </label></div>
+    <div><label th:text="'Chave pix: ' + *{chavePix}"> </label></div>
+    <div><label th:text="'Preço p/ passeio:' + *{precoPasseio}"></label> </div>
 </div>
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
 <script src="/js/profissional/cadastrar.js"></script>

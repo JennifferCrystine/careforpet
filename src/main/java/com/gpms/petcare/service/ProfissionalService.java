@@ -1,5 +1,6 @@
 package com.gpms.petcare.service;
 
+import com.gpms.petcare.dto.AgendarPasseioDTO;
 import com.gpms.petcare.model.Profissional;
 import com.gpms.petcare.repository.ProfissionalRepository;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -39,4 +40,5 @@ public class ProfissionalService {
     public List<Profissional> listaProfissionais() {
         return profissionalRepository.findAll();
     }
+
 }

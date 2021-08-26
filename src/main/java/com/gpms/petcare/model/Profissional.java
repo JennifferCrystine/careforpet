@@ -30,6 +30,9 @@ public class Profissional {
     private Double nota;
 
     @Column
+    private Double precoPasseio;
+
+    @Column
     private String estado;
 
     @Column

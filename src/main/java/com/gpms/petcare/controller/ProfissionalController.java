@@ -2,16 +2,21 @@ package com.gpms.petcare.controller;
 
 import com.fasterxml.jackson.core.JsonProcessingException;
 import com.gpms.petcare.client.LocalidadesAPIClient;
+import com.gpms.petcare.dto.AgendarPasseioDTO;
 import com.gpms.petcare.dto.AvaliaProfissionalDTO;
 import com.gpms.petcare.dto.localidadesAPIClient.EstadoDTO;
 import com.gpms.petcare.enums.TipoHospedagem;
 import com.gpms.petcare.model.Avaliacao;
+import com.gpms.petcare.model.Passeio;
 import com.gpms.petcare.model.Profissional;
 import com.gpms.petcare.model.Usuario;
 import com.gpms.petcare.service.AvaliacaoService;
+import com.gpms.petcare.service.PasseioService;
 import com.gpms.petcare.service.ProfissionalService;
 import com.gpms.petcare.service.UsuarioService;
 import com.gpms.petcare.session.UsuarioLogadoSession;
+import javassist.NotFoundException;
+import org.hibernate.annotations.NotFound;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -38,6 +43,9 @@ public class ProfissionalController {
 
     @Autowired
     private UsuarioLogadoSession usuarioLogadoSession;
+
+    @Autowired
+    private PasseioService passeioService;
 
     @GetMapping("/cadastrar")
     public String cadastrar(Model model,
@@ -210,6 +218,45 @@ public class ProfissionalController {
             model.addAttribute(dto);
             return "profissional/avalia";
         }
+    }
+
+    @GetMapping("/agendar/{id}")
+    public String agenda(@PathVariable(name = "id") Long profissionalId, Model model) throws NotFoundException {
+
+        Profissional profissional = profissionalService.buscaProfissional(profissionalId);
+
+        if (Objects.isNull(profissional))
+            throw new NotFoundException("Profissional não encontrado");
+
+        AgendarPasseioDTO agendarPasseioDTO = new AgendarPasseioDTO();
+        agendarPasseioDTO.setUsuarioId(usuarioLogadoSession.getId());
+        agendarPasseioDTO.setProfissionalId(profissionalId);
+
+        model.addAttribute("dto", agendarPasseioDTO);
+        model.addAttribute("nome", profissional.getNome());
+        model.addAttribute("telefone", profissional.getTelefone());
+
+        return "profissional/agendar";
+
+    }
+
+    @PostMapping("/agendar")
+    public String agendar(AgendarPasseioDTO dto, Model model) {
+
+        Passeio passeio = new Passeio();
+
+        passeio.setProfissionalId(dto.getProfissionalId());
+        passeio.setUsuarioId(usuarioLogadoSession.getId());
+
+        passeio.setData(dto.getData());
+
+        Passeio novoPasseio = passeioService.criaPasseio(passeio);
+
+        Profissional profissional = profissionalService.buscaProfissional(novoPasseio.getProfissionalId());
+
+        model.addAttribute("profissional", profissional);
+        model.addAttribute("passeio", novoPasseio);
+        return "profissional/agendadoSucesso";
     }
 
 }

@@ -1,0 +1,12 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" xmlns:th="https://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+<h1>Agendamento concluído</h1>
+    <p th:text="'O passeio foi agendado com ' + ${profissional.nome} + ' para ' +  ${passeio.data} + ', realize pagamento com a chave pix abaixo e aguarde confirmação do profissional.'"></p>
+    <p th:text="'Chave Pix: ' + ${profissional.chavePix}"></p>
+</body>
+</html>
