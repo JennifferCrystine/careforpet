@@ -159,8 +159,58 @@ public class ProfissionalController {
     }
 
     @GetMapping("/listar")
-    public String listaProfissionais(Model model) {
-        model.addAttribute("profissionais", profissionalService.listaProfissionais());
+    public String listaProfissionais(Model model, @RequestParam(name = "uf") Optional<String> estadoOp, @RequestParam(name="cidade") Optional<String> cidadeOp) throws JsonProcessingException {
+
+        List<Profissional> profissionais = profissionalService.listaProfissionais();
+        if (estadoOp.isPresent() && !estadoOp.get().equals("")){
+            profissionais = profissionais.stream().filter(p -> p.getEstado().equals(estadoOp.get())).collect(Collectors.toList());
+
+        }
+
+
+        String cidadeSelecionada = "";
+        if (cidadeOp.isPresent() && !cidadeOp.get().equals("")) {
+            profissionais = profissionais.stream().filter(p -> {
+                try {
+                    return p.getCidade().equals(cidadeOp.get());
+                } catch (NullPointerException ne) {
+                    return false;
+                }
+
+            }).collect(Collectors.toList());
+        }
+
+        List<EstadoDTO> estadosDTOs = Arrays.asList(localidadesAPIClient.getTodosEstados());
+        List<String> cidades = new ArrayList<>();
+
+        String estadoSelecionado = "";
+
+        Optional<EstadoDTO> estadoDTOselecionadoOp;
+
+
+        if (estadoOp.isPresent() && !estadoOp.get().equals("")) {
+            estadoDTOselecionadoOp = estadosDTOs.stream().filter(e -> e.getSigla().equals(estadoOp.get())).findFirst();
+            if (estadoDTOselecionadoOp.isPresent()) {
+                estadoSelecionado = estadoDTOselecionadoOp.get().getSigla();
+                cidades = localidadesAPIClient.getCidadesPorEstado(estadoDTOselecionadoOp.get().getId()).stream().map(cidadeObj -> {
+                    LinkedHashMap cidadeMap = (LinkedHashMap) cidadeObj;
+                    return (String) cidadeMap.get("nome");
+                }).collect(Collectors.toList());
+            }
+
+            if (cidadeOp.isPresent() && cidades.contains(cidadeOp.get())) {
+                cidadeSelecionada = cidadeOp.get();
+            }
+        }
+
+        List<String> estados = estadosDTOs.stream().map(EstadoDTO::getSigla).collect(Collectors.toList());
+        estados.sort(Comparator.naturalOrder());
+
+        model.addAttribute("estados", estadosDTOs.stream().map(EstadoDTO::getSigla).collect(Collectors.toList()));
+        model.addAttribute("cidades", cidades);
+        model.addAttribute("estadoSelecionado", estadoSelecionado);
+        model.addAttribute("cidadeSelecionada", cidadeSelecionada);
+        model.addAttribute("profissionais", profissionais);
         return "profissional/listar";
     }
 
