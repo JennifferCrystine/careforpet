@@ -2,11 +2,19 @@
 <html xmlns="http://www.w3.org/1999/xhtml" xmlns:th="https://www.thymeleaf.org">
 <head>
     <meta charset="UTF-8">
-    <title>Title</title>
+    <title>Sucesso</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
+
 </head>
 <body>
-<h1>Agendamento concluído</h1>
-    <p th:text="'O passeio foi agendado com ' + ${profissional.nome} + ' para ' +  ${passeio.data} + ', realize pagamento com a chave pix abaixo e aguarde confirmação do profissional.'"></p>
-    <p th:text="'Chave Pix: ' + ${profissional.chavePix}"></p>
+    <div class="w-50 card container mt-5">
+        <div class="card-body">
+            <h3 class="card-title">Agendamento concluído!</h3>
+            <p th:text="'O passeio foi agendado com ' + ${profissional.nome} + ' para ' +  ${passeio.data} + '. Aguarde confirmação do profissional e faça o PIX.'"></p>
+            <p th:text="'Chave Pix: ' + ${profissional.chavePix}"></p>
+            <a class="card-link btn btn-primary" th:href="@{/}">Ok!</a>
+        </div>
+    </div>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
 </body>
 </html>
