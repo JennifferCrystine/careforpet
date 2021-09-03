@@ -10217,8 +10217,11 @@ footer{
     -webkit-text-size-adjust: 100%;
     -webkit-tap-highlight-color: rgba(0, 0, 0, 0);
 }
-.box{
+#hospedagem .box {
     background-color: #fefbf4;
+}
+
+.box{
     margin: 2% 6%;
     padding: 1% 3%;
 }

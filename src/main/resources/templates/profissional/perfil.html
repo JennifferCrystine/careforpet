@@ -2,15 +2,18 @@
 <html xmlns="http://www.w3.org/1999/xhtml" xmlns:th="https://www.thymeleaf.org"
 >
 <head>
-    <title>Profissional</title>
+    <link rel="stylesheet" type="text/css" href="/css/style.css" />
+    <title>Profissional - Cuidado com pets</title>
 </head>
 <body>
+<div th:replace="~{fragments/header :: header}"></div>
 <h1>Página de Perfil</h1>
 <span th:if="${errorMessage}"  th:text="${errorMessage}">Error</span>
 
 <div th:object="${profissional}">
-    <a th:if="${podeAvaliar}" th:href="'/profissional/avalia/' + *{id}">Clique aqui para Avaliar</a>
+
     <a th:href="'/profissional/agendar/' + *{id}">Clique aqui para agendar passeio</a>
+    <a th:if="${podeAvaliar}" th:href="'/profissional/avalia/' + *{id}">Clique aqui para Avaliar</a>
     <div><label th:text="'Nome: ' + *{nome}"> </label></div>
     <div><label th:text="'Nota: ' + *{nota}"> </label></div>
     <div><label th:text="'Estado: ' + *{estado}"> </label></div>
@@ -22,5 +25,7 @@
 </div>
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
 <script src="/js/profissional/cadastrar.js"></script>
+<!-- Footer-->
+<div th:replace="~{fragments/footer :: footer}"></div>
 </body>
 </html>
