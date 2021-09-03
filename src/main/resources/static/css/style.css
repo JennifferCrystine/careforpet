@@ -399,13 +399,6 @@ legend+* {
     clear: left;
 }
 
-::-webkit-datetime-edit-fields-wrapper, ::-webkit-datetime-edit-text, ::-webkit-datetime-edit-minute, ::-webkit-datetime-edit-hour-field, ::-webkit-datetime-edit-day-field, ::-webkit-datetime-edit-month-field, ::-webkit-datetime-edit-year-field {
-    padding: 0;
-}
-
-::-webkit-inner-spin-button {
-    height: auto;
-}
 
 [type=search] {
     outline-offset: -2px;
@@ -2100,11 +2093,6 @@ textarea.form-control-lg {
     cursor: pointer;
 }
 
-.form-control-color::-moz-color-swatch {
-    height: 1.5em;
-    border-radius: 0.25rem;
-}
-
 .form-control-color::-webkit-color-swatch {
     height: 1.5em;
     border-radius: 0.25rem;
@@ -2441,10 +2429,6 @@ textarea.form-control-lg {
     color: transparent;
 }
 
-.form-floating>.form-control:not(:-moz-placeholder-shown) {
-    padding-top: 1.625rem;
-    padding-bottom: 0.625rem;
-}
 
 .form-floating>.form-control:not(:-ms-input-placeholder) {
     padding-top: 1.625rem;
@@ -2466,10 +2450,6 @@ textarea.form-control-lg {
     padding-bottom: 0.625rem;
 }
 
-.form-floating>.form-control:not(:-moz-placeholder-shown)~label {
-    opacity: 0.65;
-    transform: scale(0.85) translateY(-0.5rem) translateX(0.15rem);
-}
 
 .form-floating>.form-control:not(:-ms-input-placeholder)~label {
     opacity: 0.65;
@@ -3962,7 +3942,6 @@ textarea.form-control-lg {
 }
 
 .navbar-nav-scroll {
-    max-height: var(--bs-scroll-height, 75vh);
     overflow-y: auto;
 }
 
@@ -4516,8 +4495,6 @@ textarea.form-control-lg {
     float: left;
     padding-right: 0.5rem;
     color: #6c757d;
-    content: var(--bs-breadcrumb-divider, "/")/* rtl: var(--bs-breadcrumb-divider, "/") */
-    ;
 }
 
 .breadcrumb-item.active {
@@ -5238,7 +5215,6 @@ textarea.form-control-lg {
 }
 
 .toast-container {
-    width: -webkit-max-content;
     width: -moz-max-content;
     width: max-content;
     max-width: 100%;
@@ -10259,4 +10235,64 @@ body {
 }
 .card-hospedagem p{
     margin-bottom: 0.2rem;
+}
+
+/*---------------Avaliar Profissional---------------*/
+.rating {
+    border: none;
+    margin-right: 49px
+}
+
+.myratings {
+    font-size: 85px;
+    color: green
+}
+
+.rating>[id^="star"] {
+    display: none
+}
+
+.rating>label:before {
+    margin: 5px;
+    font-size: 2.25em;
+    font-family: FontAwesome;
+    display: inline-block;
+    content: "\f005"
+}
+
+.rating>.half:before {
+    content: "\f089";
+    position: absolute
+}
+
+.rating>label {
+    color: #ddd;
+    float: right
+}
+
+.rating>[id^="star"]:checked~label,
+.rating:not(:checked)>label:hover,
+.rating:not(:checked)>label:hover~label {
+    color: #FFD700
+}
+
+.rating>[id^="star"]:checked+label:hover,
+.rating>[id^="star"]:checked~label:hover,
+.rating>label:hover~[id^="star"]:checked~label,
+.rating>[id^="star"]:checked~label:hover~label {
+    color: #FFED85
+}
+
+.reset-option {
+    display: none
+}
+
+.reset-button {
+    margin: 6px 12px;
+    background-color: rgb(255, 255, 255);
+    text-transform: uppercase
+}
+
+.mt-100 {
+    margin-top: 100px
 }
