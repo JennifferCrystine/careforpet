@@ -72,7 +72,6 @@
                     <p th:text="${'Valor diário: R$'  + h.valorDiaria}" class="card-text">th:text="${h.valorDiaria}"</p>
                     <p th:text="${'Telefone: '  + h.telefone}" class="card-text">th:text="${h.telefone}</p>
                     <p th:text="${'Endereço: '  + h.endereco}" class="card-text">th:text="${h.endereco}</p>
-                    <p th:text="${'Valor total: R$'  + h.valorTotal}" class="card-text">th:text="${h.valorDiaria}"</p>
                     <a th:href="${'/hospedagem/reservar/' + h.id}" class="btn btn-padrao">Reservar</a>
                 </div>
             </th:block>

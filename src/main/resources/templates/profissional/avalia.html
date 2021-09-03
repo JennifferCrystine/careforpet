@@ -1,18 +1,28 @@
 <!DOCTYPE html>
-<html xmlns="http://www.w3.org/1999/xhtml" xmlns:th="https://www.thymeleaf.org">
+
+<html lang="pt-br" xmlns="http://www.w3.org/1999/xhtml" xmlns:th="https://www.thymeleaf.org">
+
 <head>
     <meta charset="UTF-8">
-    <title>Title</title>
+    <title>Avaliar - Cuidado com pets</title>
+
+    <link rel="stylesheet" type="text/css" href="/css/style.css" />
+    <script type="text/javascript" src="https://cdn.jsdelivr.net/jquery/latest/jquery.min.js"></script>
 </head>
 <body>
-    <span th:if="${errorMessage}"  th:text="${errorMessage}">Error</span>
-  <form th:action="@{/profissional/avalia}" method="post" th:object="${avaliaProfissionalDTO}">
-      <input type="hidden" th:field="*{usuarioId}">
-      <input type="hidden" th:field="*{profissionalId}">
-      Nota (de 1.0 a 100.0): <input th:field="*{nota}" type="number">
+    <div th:replace="~{fragments/header :: header}"></div>
+    <div class="box px-5">
 
-      <button type="submit"> Avaliar </button>
+        <span th:if="${errorMessage}"  th:text="${errorMessage}">Error</span>
+        <form th:action="@{/profissional/avalia}" method="post" th:object="${avaliaProfissionalDTO}">
+            <input type="hidden" th:field="*{usuarioId}">
+            <input type="hidden" th:field="*{profissionalId}">
+            Nota (de 1.0 a 100.0): <input th:field="*{nota}" type="number">
 
-  </form>
+            <button type="submit"> Avaliar </button>
+        </form>
+    </div>
+    <!-- Footer-->
+    <div th:replace="~{fragments/footer :: footer}"></div>
 </body>
 </html>
