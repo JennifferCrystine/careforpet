@@ -10238,61 +10238,19 @@ body {
 }
 
 /*---------------Avaliar Profissional---------------*/
-.rating {
-    border: none;
-    margin-right: 49px
+#avalia {
+    background-color: #fdeeea;
 }
-
-.myratings {
-    font-size: 85px;
-    color: green
+.avaliacao{
+    padding: 5%;
 }
-
-.rating>[id^="star"] {
-    display: none
-}
-
-.rating>label:before {
-    margin: 5px;
-    font-size: 2.25em;
-    font-family: FontAwesome;
-    display: inline-block;
-    content: "\f005"
-}
-
-.rating>.half:before {
-    content: "\f089";
-    position: absolute
-}
-
-.rating>label {
-    color: #ddd;
-    float: right
-}
-
-.rating>[id^="star"]:checked~label,
-.rating:not(:checked)>label:hover,
-.rating:not(:checked)>label:hover~label {
-    color: #FFD700
-}
-
-.rating>[id^="star"]:checked+label:hover,
-.rating>[id^="star"]:checked~label:hover,
-.rating>label:hover~[id^="star"]:checked~label,
-.rating>[id^="star"]:checked~label:hover~label {
-    color: #FFED85
-}
-
-.reset-option {
-    display: none
-}
-
-.reset-button {
-    margin: 6px 12px;
-    background-color: rgb(255, 255, 255);
-    text-transform: uppercase
-}
-
-.mt-100 {
-    margin-top: 100px
+.avaliacao .form-control {
+    position: relative;
+    padding: 0.3rem;
+    max-width: 140px;
+    font-size: 1rem;
+    font-weight: 400;
+    background-color: #fff;
+    border: 1px solid #FCDFD5;
+    border-radius: 0.40rem;
 }
