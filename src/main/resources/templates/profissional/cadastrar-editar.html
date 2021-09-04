@@ -32,6 +32,13 @@
                 </select>
             </div>
             <div class="mb-3">
+                <label class="form-label">Serviços</label>
+                <select th:field="*{servico}">
+                    <option th:each="c : ${servicos}" th:value="${s}" th:text="${s}">
+                    </option>
+                </select>
+            </div>
+            <div class="mb-3">
                 <label class="form-label">Telefone</label>
                 <input class="form-control" type="text" th:field="*{telefone}" placeholder="Telefone"/>
             </div>
