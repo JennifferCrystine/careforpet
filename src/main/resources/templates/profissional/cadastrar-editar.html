@@ -2,36 +2,63 @@
 <html xmlns="http://www.w3.org/1999/xhtml" xmlns:th="https://www.thymeleaf.org"
 >
 <head>
-    <link rel="stylesheet" type="text/css" href="/css/style.css" />
-  <title>Profissional - Cuidado com pets</title>
+  <title>Profissional</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
 </head>
 <body>
-<div th:replace="~{fragments/header :: header}"></div>
-<h1 th:text="${#strings.capitalize(pagina) + ' Profissional'}"></h1>
-<span th:if="${errorMessage}"  th:text="${errorMessage}">Error</span>
+    <div th:replace="~{fragments/header :: header}"></div>
+    <span th:if="${errorMessage}"  th:text="${errorMessage}">Error</span>
+    <div class="container">
+        <h2 th:text="${#strings.capitalize(pagina) + ' Profissional'}"></h2>
+        <form th:action="${'/profissional/' + pagina}" method="post" th:object="${profissional}">
+            <div class="mb-3">
+                <label class="form-label">Nome</label>
+                <input class="form-control" type="text" th:field="*{nome}" placeholder="Nome"/>
+            </div>
+            <div class="mb-3">
+                <label class="form-label">Estado</label>
+                <select th:field="*{estado}">
+                    <option th:if="${estadoSelecionado == e}"  th:each="e : ${estados}" th:value="${e}" th:text="${e}" selected="selected">
+                    </option>
+                    <option th:if="${estadoSelecionado != e}"  th:each="e : ${estados}" th:value="${e}" th:text="${e}" >
+                    </option>
+                </select>
+            </div>
+            <div class="mb-3">
+                <label class="form-label">Cidade</label>
+                <select th:field="*{cidade}">
+                    <option th:each="c : ${cidades}" th:value="${c}" th:text="${c}">
+                    </option>
+                </select>
+            </div>
+            <div class="mb-3">
+                <label class="form-label">Serviços</label>
+                <select th:field="*{servico}">
+                    <option th:each="c : ${servicos}" th:value="${s}" th:text="${s}">
+                    </option>
+                </select>
+            </div>
+            <div class="mb-3">
+                <label class="form-label">Telefone</label>
+                <input class="form-control" type="text" th:field="*{telefone}" placeholder="Telefone"/>
+            </div>
+            <div class="mb-3">
+                <label class="form-label">Email</label>
+                <input class="form-control" type="text" th:field="*{email}" placeholder="Email"/>
+            </div>
+            <div class="mb-3">
+                <label class="form-label">Chave Pix</label>
+                <input class="form-control" type="text" th:field="*{chavePix}" placeholder="Chave Pix"/>
+            </div>
+            <input th:if="${pagina == 'alterar'}" type="hidden" name="id" th:value="${id}">
+            <button class="btn btn-primary" type="submit" th:value="${pagina}" th:text="Cadastrar"></button>
+        </form>
+    </div>
 
-<form th:action="${'/profissional/' + pagina}" method="post" th:object="${profissional}">
-    <div><label> Nome : <input type="text" th:field="*{nome}"/> </label></div>
-    <div><label> Estado: </label><select th:field="*{estado}">
-        <option th:if="${estadoSelecionado == e}"  th:each="e : ${estados}" th:value="${e}" th:text="${e}" selected="selected">
-        </option>
-        <option th:if="${estadoSelecionado != e}"  th:each="e : ${estados}" th:value="${e}" th:text="${e}" >
-        </option>
-    </select> </div>
-    <div><label> Cidade: </label><select th:field="*{cidade}">
-        <option th:each="c : ${cidades}" th:value="${c}" th:text="${c}">
-        </option>
-    </select> </div>
-    <div><label> telefone: <input type="text" th:field="*{telefone}"/> </label></div>
-    <div><label> email: <input type="text" th:field="*{email}"/> </label></div>
-    <div><label> Preço: <input type="text" th:field="*{precoPasseio}"/> </label></div>
-  <div><label> chavePix: <input type="text" th:field="*{chavePix}"/> </label></div>
-    <input th:if="${pagina == 'alterar'}" type="hidden" name="id" th:value="${id}">
-  <div><input type="submit" th:value="${pagina}"/></div>
-</form>
-<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
-<script src="/js/profissional/cadastrar-editar.js"></script>
-<!-- Footer-->
-<div th:replace="~{fragments/footer :: footer}"></div>
+    <!--  <div><input type="submit" th:value="${pagina}"/></div>-->
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+    <script src="/js/profissional/cadastrar-editar.js"></script>
+    <!-- Footer-->
+    <div th:replace="~{fragments/footer :: footer}"></div>
 </body>
 </html>
