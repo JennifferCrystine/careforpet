@@ -1,2 +1,4 @@
 // Datepicker
-$('#data').datetimepicker();
+$('#data').datetimepicker({
+    format: 'DD/MM/YYYY HH:mm'
+});

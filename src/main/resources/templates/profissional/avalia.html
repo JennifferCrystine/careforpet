@@ -7,9 +7,10 @@
     <title>Avaliar - Cuidado com pets</title>
 
     <link rel="stylesheet" type="text/css" href="/css/style.css" />
-    <script type="text/javascript" src="https://cdn.jsdelivr.net/jquery/latest/jquery.min.js"></script>
+    <script type="text/javascript" src="/js/profissional/avaliar.js"></script>
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.2/css/all.min.css" rel="stylesheet">
 </head>
-<body>
+<body id="avalia">
     <div th:replace="~{fragments/header :: header}"></div>
     <div class="box px-5">
 
@@ -17,9 +18,18 @@
         <form th:action="@{/profissional/avalia}" method="post" th:object="${avaliaProfissionalDTO}">
             <input type="hidden" th:field="*{usuarioId}">
             <input type="hidden" th:field="*{profissionalId}">
-            Nota (de 1.0 a 100.0): <input th:field="*{nota}" type="number">
 
-            <button type="submit"> Avaliar </button>
+            <div class="row">
+                <div class="col-md-6">
+                    <ul>
+                        <div class="avaliacao" >
+                            <h6 th:field="*{profissionalId}" type="text">Você está avaliando: </h6>
+                            <p> Nota: <input class="form-control" th:field="*{nota}" type="number" placeholder="0.0 a 10.0"></p>
+                            <button type="submit" class="btn btn-padrao"> Avaliar </button>
+                        </div>
+                    </ul>
+                </div>
+            </div>
         </form>
     </div>
     <!-- Footer-->
