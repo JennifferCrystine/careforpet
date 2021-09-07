@@ -12,4 +12,8 @@ public class AvaliaProfissionalDTO {
     private Long usuarioId;
 
     private Double nota;
+
+    private String nome;
+
+    private String servico;
 }

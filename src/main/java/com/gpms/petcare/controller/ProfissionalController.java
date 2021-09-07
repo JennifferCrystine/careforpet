@@ -6,6 +6,7 @@ import com.gpms.petcare.dto.AgendarPasseioDTO;
 import com.gpms.petcare.dto.AvaliaProfissionalDTO;
 import com.gpms.petcare.dto.localidadesAPIClient.EstadoDTO;
 import com.gpms.petcare.enums.TipoHospedagem;
+import com.gpms.petcare.enums.TipoServicos;
 import com.gpms.petcare.model.Avaliacao;
 import com.gpms.petcare.model.Passeio;
 import com.gpms.petcare.model.Profissional;
@@ -64,6 +65,7 @@ public class ProfissionalController {
 
         model.addAttribute("profissional", profissional);
         model.addAttribute("pagina", "cadastrar");
+        model.addAttribute("servicos", Arrays.stream(TipoServicos.values()).map(TipoServicos::getNomeHumano).collect(Collectors.toList()));
 
         EstadoDTO[] estadoDTOs = localidadesAPIClient.getTodosEstados();
         List<String> estadosSiglas = Arrays.stream(estadoDTOs)
@@ -119,6 +121,7 @@ public class ProfissionalController {
 
         model.addAttribute("profissional", profissional);
         model.addAttribute("pagina", "alterar");
+        model.addAttribute("servicos", Arrays.stream(TipoServicos.values()).map(TipoServicos::getNomeHumano).collect(Collectors.toList()));
 
         EstadoDTO[] estadoDTOs = localidadesAPIClient.getTodosEstados();
         List<String> estadosSiglas = Arrays.stream(estadoDTOs)
@@ -243,8 +246,11 @@ public class ProfissionalController {
     @GetMapping("/avalia/{id}")
     public String avalia(Model model, @PathVariable(name = "id") Long profissionalId) {
         AvaliaProfissionalDTO dto = new AvaliaProfissionalDTO();
+        Profissional profissional = profissionalService.buscaProfissional(profissionalId);
         dto.setProfissionalId(profissionalId);
         dto.setUsuarioId(usuarioLogadoSession.getId());
+        dto.setServico(profissional.getServico());
+        dto.setNome(profissional.getNome());
         model.addAttribute(dto);
 
         return "profissional/avalia";

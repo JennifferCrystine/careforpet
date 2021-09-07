@@ -20,12 +20,12 @@
             <input type="hidden" th:field="*{profissionalId}">
 
             <div class="row">
-                <div class="col-md-6">
+                <div class="col-md-10">
                     <ul>
                         <div class="avaliacao" >
-                            <h6 th:field="*{profissionalId}" type="text">Você está avaliando: </h6>  <!-- Nome da pessoa que estará avaliando -->
-                            <p th:field="*{profissionalId}" type="text">Serviço: </p>   <!-- Serviço que a pessoa prestou -->
-                            <p> Nota: <input class="form-control" th:field="*{nota}" type="number" placeholder="0.0 a 10.0"></p>
+                            <h6 th:text="'Você está avaliando: ' + *{nome}"></h6>  <!-- Nome da pessoa que estará avaliando -->
+                            <p th:text="'Serviço: ' + *{servico}"> </p>   <!-- Serviço que a pessoa prestou -->
+                            <p> Nota: <input class="form-control" th:field="*{nota}" type="number" step="0.1" min="0" max="10" placeholder="0.0 a 10.0"></p>
                             <button type="submit" class="btn btn-padrao"> Avaliar </button>
                         </div>
                     </ul>

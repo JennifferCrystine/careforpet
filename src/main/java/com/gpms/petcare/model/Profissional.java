@@ -30,12 +30,15 @@ public class Profissional {
     private Double nota;
 
     @Column
-    private Double precoPasseio;
+    private Double preco;
 
     @Column
     private String estado;
 
     @Column
     private String cidade;
+
+    @Column
+    private String servico;
 
 }
