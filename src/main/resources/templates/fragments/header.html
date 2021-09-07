@@ -4,19 +4,19 @@
     <nav class="navbar navbar-expand-lg navbar-light" id="nav">
       <div class="container px-5">
         <a class="navbar-brand text-black-50" th:href="@{/}">Cuidado com Pets</a>
-        <form class="d-flex">
-          <input class="form-control me-2" type="search" placeholder="Digite sua busca aqui" id="buscaHome" aria-label="Search">
-          <button class="btn btn-outline-success" type="submit">Buscar</button>
-        </form>
+
         <button class="navbar-toggler" type="button" data-bs-toggle="collapse"
                 data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent"
                 aria-expanded="false" aria-label="Toggle navigation"><span
                 class="navbar-toggler-icon"></span></button>
         <div class="collapse navbar-collapse" id="navbarSupportedContent">
+          <form class="d-flex form-inline my-2 my-lg-0">
+            <input class="form-control me-2 mr-sm-2" type="search" placeholder="Pesquisar" id="buscaHome" aria-label="Pesquisar ">
+            <button class="btn btn-outline-success my-sm-0" type="submit">Buscar</button>
+          </form>
           <ul class="navbar-nav ms-auto mb-2 mb-lg-0">
             <li class="nav-item"><a class="nav-link" th:href="@{/}">Home</a></li>
             <li class="nav-item"><a class="nav-link" th:href="@{/hospedagem/listar}">Hospedagem</a></li>
-            <li class="nav-item"><a class="nav-link" th:href="@{/profissional/cadastrar}">Sou Profissional</a></li>
             <li class="nav-item"><a class="nav-link" th:href="@{/profissional/listar}">Profissionais</a></li>
             <li class="nav-item"><a class="nav-link" th:href="@{/adocao/registrar}">Anunciar Pet</a></li>
             <li class="nav-item"><a class="nav-link" th:href="@{/adocao/disponiveis}">Adoção</a></li>

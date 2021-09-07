@@ -27,29 +27,35 @@
     <title>Profissionais</title>
 </head>
 <body id="profissional">
-
     <div th:replace="~{fragments/header :: header}"></div>
 
-    <div class="container mt-4">
-        <th:block th:if="${colocarMensagemSucesso}">
-            <div class="alert alert-success" role="alert"><b>Operação realizada com sucesso!</b></div>
-        </th:block>
+    <th:block th:if="${colocarMensagemSucesso}">
+        <div class="alert alert-success" role="alert"><b>Operação realizada com sucesso!</b></div>
+    </th:block>
 
-        <div><label> Estado: </label><select id="estado">
-            <option value="">Selecione...</option>
-            <option th:if="${estadoSelecionado == e}"  th:each="e : ${estados}" th:value="${e}" th:text="${e}" selected="selected">
-            </option>
-            <option th:if="${estadoSelecionado != e}"  th:each="e : ${estados}" th:value="${e}" th:text="${e}" >
-            </option>
-        </select> </div>
-        <div><label> Cidade: </label><select id="cidade">
-            <option value="">Selecione...</option>
-            <option th:if="${cidadeSelecionada == c}"  th:each="c : ${cidades}" th:value="${c}" th:text="${c}" selected="selected">
-            </option>
-            <option th:if="${cidadeSelecionada != c}"  th:each="c : ${cidades}" th:value="${c}" th:text="${c}" >
-            </option>
-        </select> </div>
-        <div class="box px-5">
+    <div class="box px-5">
+        <div class="filtros row">
+            <div class="filtro col-3">
+                <label> Estado: </label>
+                <select class="form-select" id="estado">
+                    <option value="">Selecione...</option>
+                    <option th:if="${estadoSelecionado == e}"  th:each="e : ${estados}" th:value="${e}" th:text="${e}" selected="selected"></option>
+                    <option th:if="${estadoSelecionado != e}"  th:each="e : ${estados}" th:value="${e}" th:text="${e}" ></option>
+                </select>
+            </div>
+            <div class="filtro col-3">
+                <label> Cidade: </label>
+                <select class="form-select" id="cidade">
+                    <option value="">Selecione...</option>
+                    <option th:if="${cidadeSelecionada == c}"  th:each="c : ${cidades}" th:value="${c}" th:text="${c}" selected="selected"></option>
+                    <option th:if="${cidadeSelecionada != c}"  th:each="c : ${cidades}" th:value="${c}" th:text="${c}" ></option>
+                </select>
+            </div>
+            <div class="filtro col-6 btn-cadastrar">
+                <a th:href="@{/profissional/cadastrar}" class="btn btn-padrao">Sou profissional</a>
+            </div>
+        </div>
+
             <ul>
                 <th:block th:each="p : ${profissionais}">
                     <div class="card-body" >
@@ -63,9 +69,9 @@
                     </div>
                 </th:block>
             </ul>
-        </div>
 
         </div>
+
     </div>
     <!-- Footer-->
     <div th:replace="~{fragments/footer :: footer}"></div>
