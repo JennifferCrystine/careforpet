@@ -23,7 +23,8 @@
                 <div class="col-md-6">
                     <ul>
                         <div class="avaliacao" >
-                            <h6 th:field="*{profissionalId}" type="text">Você está avaliando: </h6>
+                            <h6 th:field="*{profissionalId}" type="text">Você está avaliando: </h6>  <!-- Nome da pessoa que estará avaliando -->
+                            <p th:field="*{profissionalId}" type="text">Serviço: </p>   <!-- Serviço que a pessoa prestou -->
                             <p> Nota: <input class="form-control" th:field="*{nota}" type="number" placeholder="0.0 a 10.0"></p>
                             <button type="submit" class="btn btn-padrao"> Avaliar </button>
                         </div>
