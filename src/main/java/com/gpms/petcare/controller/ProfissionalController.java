@@ -238,7 +238,7 @@ public class ProfissionalController {
         Boolean usuarioPodeAvaliar = !avaliacaoService.usuarioAvaliouProfissional(usuario, profissional);
 
         model.addAttribute("podeAvaliar", usuarioPodeAvaliar);
-        model.addAttribute(profissional);
+        model.addAttribute("profissional", profissional);
 
         return "profissional/perfil";
     }
